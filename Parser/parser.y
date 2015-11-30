@@ -44,7 +44,7 @@
    match our tokens.l lex file. We also define the node type
    they represent.
  */
-%token <string> TIDENTIFIER TINTEGER TDOUBLE TCMD
+%token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
 %token <token> TLBRACK TRBRACK TLPAREN TRPAREN TCOMMA TATSIGN TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV
@@ -55,6 +55,7 @@
    calling an (NIdentifier*). It makes the compiler happy.
  */
 %type <ident> ident
+%type <ident> text
 %type <cmd> cmd
 //%type <space> space
 %type <expr> numeric expr loop space_decl source space mel
@@ -85,7 +86,7 @@ stmt :  expr { $$ = new NExpressionStatement(*$1); } | ident{errno=ERR_UNKNOWN_C
 expr : mel | cmd | loop | space_decl
      ;
 
-cmd : TCMD {printf("CMD... \n");$$ = new NCommand(*$1); delete $1;}
+cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
     ;
 
 loop : TLBRACK mel TCOMMA cmd TRBRACK { $$ = new NLoop(*$2,*$4);}
@@ -93,10 +94,10 @@ loop : TLBRACK mel TCOMMA cmd TRBRACK { $$ = new NLoop(*$2,*$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}
      ;
 
-space_decl : TLPAREN ident TCOMMA numeric TRPAREN {$$ = new NSAssignment($2,$4);}
+space_decl : TLPAREN text TCOMMA numeric TRPAREN {$$ = new NSAssignment($2,$4);}
       ;
 
-space : TATSIGN ident { $$ = new NSpace($2);}
+space : TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
       ;
 
 source : TSHARP ident { $$ = new NSource($2);}
@@ -104,6 +105,9 @@ source : TSHARP ident { $$ = new NSource($2);}
 
 
 ident : TIDENTIFIER {;$$ = new NIdentifier(*$1); delete $1;}
+      ;
+
+text : TTEXT {$$ = new NIdentifier(*$1); delete $1;}
       ;
 
 mel : source | space | numeric

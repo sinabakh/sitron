@@ -9,9 +9,15 @@
 extern "C" int yywrap() { }
 %}
 
+ident [a-zA-Z_][a-zA-Z0-9_]*
+whitesp [  \t\n]
+shit (?=,)
+text  [a-zA-Z _]+[a-zA-Z]+
+
 %%
 
-[p|r|d|l|u|n]+            SAVE_TOKEN; return TCMD;
+[@]+{text}              SAVE_TOKEN; return TSPACE;
+[ ]*[p|r|d|l|u|n]+[ ]*  SAVE_TOKEN; return TCMD;
 [0-9]+                  SAVE_TOKEN; return TINTEGER;
 [0-9]+.[0-9]+           SAVE_TOKEN; return TDOUBLE;
 "@"                     return TOKEN(TATSIGN);
@@ -32,8 +38,9 @@ extern "C" int yywrap() { }
 "-"                     return TOKEN(TMINUS);
 "*"                     return TOKEN(TMUL);
 "/"                     return TOKEN(TDIV);
-[a-zA-Z_][a-zA-Z0-9_]*  SAVE_TOKEN; return TIDENTIFIER;
-[ ]+                  ;
-.                       printf("Unknown token!"); yyterminate();
+{text}                  SAVE_TOKEN; return TTEXT;
+{ident}                 SAVE_TOKEN; return TIDENTIFIER;
+{whitesp}+              ;
+.                       yyterminate();
 
 %%

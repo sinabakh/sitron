@@ -20,10 +20,10 @@ Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 {
 	Value* resVal;
 	Value* lValue = lhs->codeGen(arendelle);
-	int lVal = static_cast<VInt*>(lValue)->value;
+	long long lVal = static_cast<VInt*>(lValue)->value;
 
 	Value* rValue = rhs->codeGen(arendelle);
-	int rVal = static_cast<VInt*>(rValue)->value;
+	long long rVal = static_cast<VInt*>(rValue)->value;
 	if(this->op == TPLUS)
 	{
 		resVal = new VInt(lVal + rVal);
@@ -43,10 +43,10 @@ Value* NSingularOperator::codeGen(Arendelle* arendelle)
 {
 	Value* resVal;
 	Value* dfValue = df->codeGen(arendelle);
-	int dfVal = static_cast<VInt*>(dfValue)->value;
+	long long dfVal = static_cast<VInt*>(dfValue)->value;
 
 	Value* hsValue = hs->codeGen(arendelle);
-	int hsVal = static_cast<VInt*>(hsValue)->value;
+	long long hsVal = static_cast<VInt*>(hsValue)->value;
 	if(this->op == TPLUS)
 	{
 		resVal = new VInt(dfVal + hsVal);

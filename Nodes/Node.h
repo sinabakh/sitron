@@ -5,6 +5,7 @@
 #include "Base.h"
 #include "Command.h"
 #include "Loop.h"
+#include "Condition.h"
 #include "Number.h"
 #include "Identifier.h"
 #include "Source.h"

@@ -46,7 +46,7 @@
  */
 %token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
-%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TCOMMA TATSIGN TSHARP
+%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TATSIGN TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV
 
 /* Define the type of node our nonterminal symbols represent.
@@ -58,7 +58,7 @@
 %type <ident> text
 %type <cmd> cmd
 //%type <space> space
-%type <expr> numeric expr loop space_decl source space mel term mel_base
+%type <expr> numeric expr loop condition space_decl source space mel term mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
 %type <block> program stmts block
@@ -83,7 +83,7 @@ stmts : stmt { $$ = new NBlock(); $$->statements.push_back($<stmt>1); }
 stmt :  expr { $$ = new NExpressionStatement(*$1); } | ident{errno=ERR_UNKNOWN_CMD;yyerror("");}
      ;
 
-expr : mel | cmd | loop | space_decl
+expr : mel | cmd | loop | condition | space_decl
      ;
 
 cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
@@ -93,6 +93,9 @@ loop : TLBRACK mel TCOMMA cmd TRBRACK { $$ = new NLoop(*$2,*$4);}
      | TLBRACK mel TCOMMA loop TRBRACK { $$ = new NLoop(*$2,*$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}
      ;
+
+condition : TLBRACE mel TCOMMA cmd TRBRACE {$$ = new NCondition($2,$4);}
+          ;
 
 space_decl : TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
       ;

@@ -34,6 +34,8 @@ text  [a-zA-Z _]*[a-zA-Z]+
 ")"                     return TOKEN(TRPAREN);
 "["                     return TOKEN(TLBRACK);
 "]"                     return TOKEN(TRBRACK);
+"{"                     return TOKEN(TLBRACE);
+"}"                     return TOKEN(TRBRACE);
 ","                     return TOKEN(TCOMMA);
 "+"                     return TOKEN(TPLUS);
 "-"                     return TOKEN(TMINUS);

@@ -8,3 +8,12 @@ public:
     virtual Value* codeGen(Arendelle* arendelle);
 };
 
+class NSingularOperator : public NExpression{
+public:
+	int op;
+	NExpression* hs;
+	NExpression* df;
+	NSingularOperator(NExpression* df,int op, NExpression* hs) :
+	        df(df), hs(hs), op(op) { }
+	    virtual Value* codeGen(Arendelle* arendelle);
+};

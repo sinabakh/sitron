@@ -39,5 +39,27 @@ Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 	//return tmpVal;
 }
 
+Value* NSingularOperator::codeGen(Arendelle* arendelle)
+{
+	Value* resVal;
+	Value* dfValue = df->codeGen(arendelle);
+	int dfVal = static_cast<VInt*>(dfValue)->value;
+
+	Value* hsValue = hs->codeGen(arendelle);
+	int hsVal = static_cast<VInt*>(hsValue)->value;
+	if(this->op == TPLUS)
+	{
+		resVal = new VInt(dfVal + hsVal);
+	}
+	if(this->op == TMINUS)
+		resVal = new VInt(dfVal - hsVal);
+	if(this->op == TMUL)
+		resVal = new VInt(dfVal * hsVal);
+	if(this->op == TDIV)
+		resVal = new VInt(dfVal / hsVal);
+	return resVal;
+	//Value* tmpVal = new Value;
+	//return tmpVal;
+}
 
 

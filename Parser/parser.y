@@ -58,16 +58,16 @@
 %type <ident> text
 %type <cmd> cmd
 //%type <space> space
-%type <expr> numeric expr loop space_decl source space mel mel_base
+%type <expr> numeric expr loop space_decl source space mel term mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
 %type <block> program stmts block
 %type <stmt> stmt func_decl
-%type <token> operator
+%type <token> operator_lone operator_ltwo
 
 /* Operator precedence for mathematical operators */
-%left TPLUS TMINUS
-%left TMUL TDIV
+//%left TPLUS TMINUS
+//%left TMUL TDIV
 
 %start program
 
@@ -94,7 +94,7 @@ loop : TLBRACK mel TCOMMA cmd TRBRACK { $$ = new NLoop(*$2,*$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}
      ;
 
-space_decl : TLPAREN text TCOMMA numeric TRPAREN {$$ = new NSAssignment($2,$4);}
+space_decl : TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
       ;
 
 space : TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
@@ -110,9 +110,11 @@ ident : TIDENTIFIER {;$$ = new NIdentifier(*$1); delete $1;}
 text : TTEXT {$$ = new NIdentifier(*$1); delete $1;}
       ;
 
-mel : mel_base |
-      mel_base operator mel {$$ = new NBinaryOperator($1,$2,$3);}
+mel : term
+    | mel operator_lone term {$$ = new NBinaryOperator($1,$2,$3);}
     ;
+
+term: mel_base | term operator_ltwo mel_base {$$ = new NBinaryOperator($1,$2,$3);}
 
 mel_base : source | space | numeric
          ;
@@ -121,7 +123,10 @@ numeric : TINTEGER {$$ = new NInteger(atol($1->c_str())); delete $1;}
         | TDOUBLE { $$ = new NDouble(atof($1->c_str())); delete $1; }
         ;
 
-operator : TPLUS
-         ;
+operator_lone : TPLUS | TMINUS
+              ;
+
+operator_ltwo : TMUL | TDIV
+              ;
 
 %%

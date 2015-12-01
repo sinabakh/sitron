@@ -19,16 +19,21 @@
 Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 {
 	Value* resVal;
+	Value* lValue = lhs->codeGen(arendelle);
+	int lVal = static_cast<VInt*>(lValue)->value;
+
+	Value* rValue = rhs->codeGen(arendelle);
+	int rVal = static_cast<VInt*>(rValue)->value;
 	if(this->op == TPLUS)
 	{
-		Value* lValue = lhs->codeGen(arendelle);
-		int lVal = static_cast<VInt*>(lValue)->value;
-
-		Value* rValue = rhs->codeGen(arendelle);
-		int rVal = static_cast<VInt*>(rValue)->value;
-
 		resVal = new VInt(lVal + rVal);
 	}
+	if(this->op == TMINUS)
+		resVal = new VInt(lVal - rVal);
+	if(this->op == TMUL)
+		resVal = new VInt(lVal * rVal);
+	if(this->op == TDIV)
+		resVal = new VInt(lVal / rVal);
 	return resVal;
 	//Value* tmpVal = new Value;
 	//return tmpVal;

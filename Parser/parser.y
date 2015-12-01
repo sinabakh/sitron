@@ -116,7 +116,7 @@ mel : term
 
 term: mel_base | term operator_ltwo mel_base {$$ = new NBinaryOperator($1,$2,$3);}
 
-mel_base : source | space | numeric
+mel_base : source | space | numeric | TLPAREN mel TRPAREN {$$ = $2;}
          ;
 
 numeric : TINTEGER {$$ = new NInteger(atol($1->c_str())); delete $1;}

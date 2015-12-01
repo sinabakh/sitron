@@ -12,14 +12,15 @@ extern "C" int yywrap() { }
 ident [a-zA-Z_][a-zA-Z0-9_]*
 whitesp [  \t\n]
 shit (?=,)
-text  [a-zA-Z _]+[a-zA-Z]+
+text  [a-zA-Z _]*[a-zA-Z]+
 
 %%
 
 [@]+{text}              SAVE_TOKEN; return TSPACE;
+["#"]{text}             SAVE_TOKEN; return TSOURCE;
 [ ]*[p|r|d|l|u|n]+[ ]*  SAVE_TOKEN; return TCMD;
 [0-9]+                  SAVE_TOKEN; return TINTEGER;
-[0-9]+.[0-9]+           SAVE_TOKEN; return TDOUBLE;
+[0-9]+[.][0-9]+         SAVE_TOKEN; return TDOUBLE;
 "@"                     return TOKEN(TATSIGN);
 "#"                     return TOKEN(TSHARP);
 "="                     return TOKEN(TEQUAL);

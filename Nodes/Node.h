@@ -9,9 +9,11 @@
 #include "Identifier.h"
 #include "Source.h"
 #include "Space.h"
-#include "Operator.h"
 #include "Variable.h"
 #include "Function.h"
+#include "../Parser/parser.hpp"
+#include "Operator.h"
+
 //#include <llvm/Value.h>
 
 //class CodeGenContext;

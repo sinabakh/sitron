@@ -5,4 +5,5 @@ CPP_SRC += \
 ./Nodes/Loop.cpp \
 ./Nodes/Number.cpp \
 ./Nodes/Space.cpp \
-./Nodes/Source.cpp
+./Nodes/Source.cpp \
+./Nodes/Operator.cpp

@@ -44,7 +44,7 @@
    match our tokens.l lex file. We also define the node type
    they represent.
  */
-%token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE
+%token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
 %token <token> TLBRACK TRBRACK TLPAREN TRPAREN TCOMMA TATSIGN TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV
@@ -58,12 +58,12 @@
 %type <ident> text
 %type <cmd> cmd
 //%type <space> space
-%type <expr> numeric expr loop space_decl source space mel
+%type <expr> numeric expr loop space_decl source space mel mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
 %type <block> program stmts block
 %type <stmt> stmt func_decl
-%type <token> comparison
+%type <token> operator
 
 /* Operator precedence for mathematical operators */
 %left TPLUS TMINUS
@@ -100,7 +100,7 @@ space_decl : TLPAREN text TCOMMA numeric TRPAREN {$$ = new NSAssignment($2,$4);}
 space : TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
       ;
 
-source : TSHARP ident { $$ = new NSource($2);}
+source : TSOURCE { NIdentifier* tmp = new NIdentifier(*$1) ; $$ = new NSource(tmp);}
        ;
 
 
@@ -110,11 +110,18 @@ ident : TIDENTIFIER {;$$ = new NIdentifier(*$1); delete $1;}
 text : TTEXT {$$ = new NIdentifier(*$1); delete $1;}
       ;
 
-mel : source | space | numeric
+mel : mel_base |
+      mel_base operator mel {$$ = new NBinaryOperator($1,$2,$3);}
     ;
+
+mel_base : source | space | numeric
+         ;
 
 numeric : TINTEGER {$$ = new NInteger(atol($1->c_str())); delete $1;}
         | TDOUBLE { $$ = new NDouble(atof($1->c_str())); delete $1; }
         ;
+
+operator : TPLUS
+         ;
 
 %%

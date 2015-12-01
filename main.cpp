@@ -3,6 +3,7 @@
 #include "Nodes/Node.h"
 #include "Objects/Arendelle.h"
 #include "Objects/Screen.h"
+#include "Parser/parser.hpp"
 
 //typedef struct yy_buffer_state * YY_BUFFER_STATE;
 //extern YY_BUFFER_STATE yy_scan_string(char * str);

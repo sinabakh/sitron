@@ -58,12 +58,12 @@
 %type <ident> text
 %type <cmd> cmd
 //%type <space> space
-%type <expr> numeric expr loop condition space_decl source space mel term mel_base
+%type <expr> numeric expr loop condition space_decl source space mel term_lone term_ltwo mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
 %type <block> program stmts block
 %type <stmt> stmt func_decl
-%type <token> operator_lone operator_ltwo
+%type <token> operator_lone operator_ltwo operator_lthree
 
 /* Operator precedence for mathematical operators */
 //%left TPLUS TMINUS
@@ -113,11 +113,15 @@ ident : TIDENTIFIER {;$$ = new NIdentifier(*$1); delete $1;}
 text : TTEXT {$$ = new NIdentifier(*$1); delete $1;}
       ;
 
-mel : term
-    | mel operator_lone term {$$ = new NBinaryOperator($1,$2,$3);}
+mel : term_lone{}
+    | mel operator_lthree term_lone {$$ = new NBinaryOperator($1,$2,$3);}
+
+term_lone : term_ltwo
+    | term_lone operator_lone term_ltwo {$$ = new NBinaryOperator($1,$2,$3);}
     ;
 
-term: mel_base | term operator_ltwo mel_base {$$ = new NBinaryOperator($1,$2,$3);}
+term_ltwo: mel_base | term_ltwo operator_ltwo mel_base {$$ = new NBinaryOperator($1,$2,$3);}
+         ;
 
 mel_base : source | space | numeric | TLPAREN mel TRPAREN {$$ = $2;}
          ;
@@ -131,5 +135,9 @@ operator_lone : TPLUS | TMINUS
 
 operator_ltwo : TMUL | TDIV
               ;
+
+operator_lthree : TCLT | TCLE | TEQUAL | TCEQ | TCNE
+                | TCGT | TCGE
+                ;
 
 %%

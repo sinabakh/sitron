@@ -34,6 +34,18 @@ Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 		resVal = new VInt(lVal * rVal);
 	if(this->op == TDIV)
 		resVal = new VInt(lVal / rVal);
+	if(this->op == TCLT)
+		resVal = new VInt(lVal < rVal);
+	if(this->op == TCLE)
+		resVal = new VInt(lVal <= rVal);
+	if(this->op == TCGT)
+		resVal = new VInt(lVal > rVal);
+	if(this->op == TCGE)
+		resVal = new VInt(lVal >= rVal);
+	if(this->op == TCEQ || this->op == TEQUAL)
+		resVal = new VInt(lVal == rVal);
+	if(this->op == TCNE)
+		resVal = new VInt(lVal != rVal);
 	return resVal;
 	//Value* tmpVal = new Value;
 	//return tmpVal;

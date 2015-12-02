@@ -15,9 +15,23 @@ extern NBlock* programBlock;
 extern int yyparse();
 extern int yyerror(const char* str);
 
+extern FILE* yyin;
+
 int main(int argc, char **argv)
 {
     Arendelle* arendelle = new Arendelle();
+    if(argv[0] != NULL)
+    {
+	printf("Reading From File: %s \n",argv[1]);
+	FILE* file;
+	file = fopen(argv[1],"r");
+	if(file == NULL)
+	{
+	    yyerror("File Not Found!");
+	    return 0;
+	}
+	yyin = file;
+    }
     //char string[] = "p";
     //YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();

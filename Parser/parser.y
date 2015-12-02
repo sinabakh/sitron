@@ -47,7 +47,7 @@
 %token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
 %token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TATSIGN TSHARP
-%token <token> TPLUS TMINUS TMUL TDIV
+%token <token> TPLUS TMINUS TMUL TDIV TMOD TPOW
 
 /* Define the type of node our nonterminal symbols represent.
    The types refer to the %union declaration above. Ex: when
@@ -134,7 +134,7 @@ numeric : TINTEGER {$$ = new NInteger(atol($1->c_str())); delete $1;}
 operator_lone : TPLUS | TMINUS
               ;
 
-operator_ltwo : TMUL | TDIV
+operator_ltwo : TMUL | TDIV | TMOD | TPOW
               ;
 
 operator_lthree : TCLT | TCLE | TEQUAL | TCEQ | TCNE

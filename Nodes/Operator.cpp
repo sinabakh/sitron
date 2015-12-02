@@ -16,6 +16,9 @@
 
 //extern int TPLUS;
 
+extern int yyerror(const char* msg);
+extern int yywarning(const char* msg);
+
 Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 {
 	Value* resVal;
@@ -34,6 +37,20 @@ Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 		resVal = new VInt(lVal * rVal);
 	if(this->op == TDIV)
 		resVal = new VInt(lVal / rVal);
+	if(this->op == TMOD)
+		resVal = new VInt(lVal % rVal);
+	if(this->op == TPOW)
+	{
+		if(rVal < 0)
+		{
+		    yyerror("Negative Power Not Supported. Tought Zero(0) by default!");
+		    rVal = 0;
+		}
+		long long powVal = 1;
+		for(long long i=1; i<=rVal; i++)
+		    powVal *= lVal;
+		resVal = new VInt(powVal);
+	}
 	if(this->op == TCLT)
 		resVal = new VInt(lVal < rVal);
 	if(this->op == TCLE)

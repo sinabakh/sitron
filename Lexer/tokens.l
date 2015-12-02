@@ -41,6 +41,8 @@ text  [a-zA-Z _]*[a-zA-Z]+
 "-"                     return TOKEN(TMINUS);
 "*"                     return TOKEN(TMUL);
 "/"                     return TOKEN(TDIV);
+"%"                     return TOKEN(TMOD);
+"^"                     return TOKEN(TPOW);
 {text}                  SAVE_TOKEN; return TTEXT;
 {ident}                 SAVE_TOKEN; return TIDENTIFIER;
 {whitesp}+              ;

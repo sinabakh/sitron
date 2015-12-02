@@ -17,6 +17,9 @@ text  [a-zA-Z _]*[a-zA-Z]+
 %%
 
 \/\/.*                  ;
+
+\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/   ;
+
 [@]+{text}              SAVE_TOKEN; return TSPACE;
 ["#"]{text}             SAVE_TOKEN; return TSOURCE;
 [ ]*[p|r|d|l|u|n]+[ ]*  SAVE_TOKEN; return TCMD;

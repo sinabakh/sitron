@@ -41,6 +41,8 @@ public:
 	void setCanvas(long long columns, long long rows);
 	void paint(long long i, long long j);
 	void paint();
+	void clearDot(long long i, long long j);
+	void clearDot();
 	Cursor* getCursor();
 
 	void prettyPrint();

@@ -21,11 +21,15 @@ Value* NCommand::codeGen(Arendelle* arendelle)
 		if(*it == 'r')
 			arendelle->getScreen()->getCursor()->goR();
 		if(*it == 'd')
-					arendelle->getScreen()->getCursor()->goD();
+			arendelle->getScreen()->getCursor()->goD();
 		if(*it == 'l')
-					arendelle->getScreen()->getCursor()->goL();
+			arendelle->getScreen()->getCursor()->goL();
 		if(*it == 'u')
-					arendelle->getScreen()->getCursor()->goU();
+			arendelle->getScreen()->getCursor()->goU();
+		if(*it == 'c')
+			arendelle->getScreen()->clearDot();
+		if(*it == 'i')
+			arendelle->getScreen()->getCursor()->jumpToStart();
 	}
 	return tmpVal;
 }

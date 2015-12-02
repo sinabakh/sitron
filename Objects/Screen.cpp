@@ -104,6 +104,16 @@ void Screen::paint(){
 	this->paint(cursor->i, cursor->j);
 }
 
+void Screen::clearDot(long long i, long long j){
+	matrix[i][j] = 0;
+}
+
+void Screen::clearDot(){
+	if(cursor->i >= this->columns || cursor->j >= this->rows)
+			return;
+	this->clearDot(cursor->i, cursor->j);
+}
+
 Cursor* Screen::getCursor(){
 	return this->cursor;
 }

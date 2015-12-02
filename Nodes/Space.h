@@ -13,3 +13,20 @@ public:
 	NSpace(NIdentifier* name) : name(name) {}
 	virtual Value* codeGen(Arendelle* arendelle);
 };
+
+class NSTSAssignment : public NExpression {
+public:
+    NIdentifier* lhs;
+    NExpression* rhs;
+    NSTSAssignment(NIdentifier* lhs, NExpression* rhs) :
+        lhs(lhs), rhs(rhs){ }
+    virtual Value* codeGen(Arendelle* arendelle);
+};
+
+class NSTSpace : public NExpression {
+public:
+	NIdentifier* name;
+	NSTSpace(NIdentifier* name) : name(name) {}
+	virtual Value* codeGen(Arendelle* arendelle);
+};
+

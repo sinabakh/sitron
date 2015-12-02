@@ -46,7 +46,7 @@
  */
 %token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
-%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TATSIGN TSHARP
+%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TATSIGN TDOLLAR TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV TMOD TPOW
 
 /* Define the type of node our nonterminal symbols represent.
@@ -98,9 +98,11 @@ condition : TLBRACE mel TCOMMA expr TRBRACE {NIdentifier* fcd = new NIdentifier(
           ;
 
 space_decl : TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
+           | TLPAREN TDOLLAR text TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSAssignment($3,$5);}
       ;
 
 space : TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
+      | TDOLLAR text {$$ = new NSTSpace($2);}
       ;
 
 source : TSOURCE { NIdentifier* tmp = new NIdentifier(*$1) ; $$ = new NSource(tmp);}

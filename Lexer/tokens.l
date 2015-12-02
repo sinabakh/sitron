@@ -12,7 +12,7 @@ extern "C" int yywrap() { }
 ident [a-zA-Z_][a-zA-Z0-9_]*
 whitesp [  \t\n]
 shit (?=,)
-text  [a-zA-Z _]*[a-zA-Z]+
+text  [a-zA-Z. _]*[a-zA-Z]+
 
 %%
 
@@ -26,6 +26,7 @@ text  [a-zA-Z _]*[a-zA-Z]+
 [0-9]+                  SAVE_TOKEN; return TINTEGER;
 [0-9]+[.][0-9]+         SAVE_TOKEN; return TDOUBLE;
 "@"                     return TOKEN(TATSIGN);
+"$"                     return TOKEN(TDOLLAR);
 "#"                     return TOKEN(TSHARP);
 "="                     return TOKEN(TEQUAL);
 "=="                    return TOKEN(TCEQ);

@@ -52,3 +52,54 @@ Value* NSpace::codeGen(Arendelle* arendelle)
 	Value* val = new VInt(sVal);
 	return val;
 }
+
+
+void stSpaceStrCorrector(std::string* str)
+{
+	std::string::iterator it;
+	it = str->begin();
+	while(it != str->end())
+	{
+		if(*it == '$')
+			str->erase(it);
+		else if(*it == ' ')
+			str->erase(it);
+		else
+			it++;
+	}
+}
+
+Value* NSTSAssignment::codeGen(Arendelle* arendelle)
+{
+	Value* lVal = lhs->codeGen(arendelle);
+	Value* rVal = rhs->codeGen(arendelle);
+	std::string name = static_cast<VString*>(lVal)->value;
+	stSpaceStrCorrector(&name);
+	long long value = static_cast<VInt*>(rVal)->value;
+	std::cout<<std::endl<<"Define Stored Space : "<<value<<" -> "<<name<<std::endl;
+	arendelle->addOrUpdateStoredSpace(name,value);
+	Value* tmpValue = new Value;
+	return tmpValue;
+}
+
+Value* NSTSpace::codeGen(Arendelle* arendelle)
+{
+	Value* nVal = name->codeGen(arendelle);
+	std::string sName = static_cast<VString*>(nVal)->value;
+	stSpaceStrCorrector(&sName);
+	long long sVal;
+	if(arendelle->storedSpaceExist(sName))
+	{
+		sVal = arendelle->getLastStoredSpaceSearch();
+	}
+	else
+	{
+		yywarning("Non Defined Stored Space, Thought Zero(0) by Default!");
+		sVal = 0;
+	}
+	std::cout<<std::endl<<"Access Stored Space : "<<sName<<" -> "<<sVal<<std::endl;
+	Value* val = new VInt(sVal);
+	return val;
+}
+
+

@@ -48,6 +48,52 @@ long long Arendelle::getLastSpaceSearch()
 }
 
 
+void Arendelle::addOrUpdateStoredSpace(string name, long long value)
+{
+	this->storedSpaces[name] = value;
+	long long pos = 0;
+	string folders="";
+	for(long long i = 0; i<name.size(); i++)
+	{
+		if(name[i] == '.')
+		{
+			folders = folders + name.substr(pos,i-pos) + "/";
+			pos = i+1;
+			name[i] = '/';
+		}
+	}
+	cout<<"Space Storage: "<<workingDir+folders<<endl;
+	if(folders != "")
+	{
+		boost::filesystem::create_directories(workingDir+folders);
+	}
+	string filename = this->workingDir + name + ".space";
+	ofstream sFile (filename);
+	sFile << value;
+	sFile.close();
+}
+
+
+bool Arendelle::storedSpaceExist(string name)
+{
+	storedSpaceSearch = storedSpaces.find(name);
+	if(storedSpaceSearch != storedSpaces.end())
+	{
+	        return true;
+	}
+	else
+	{
+	        return false;
+	}
+}
+
+
+long long Arendelle::getLastStoredSpaceSearch()
+{
+	return storedSpaceSearch->second;
+}
+
+
 void Arendelle::initSources()
 {
 	sources.insert(std::make_pair("i",&screen->getCursor()->screen_width));
@@ -86,4 +132,75 @@ bool Arendelle::isExtendedSource(string name)
 long long Arendelle::getLastSourceSearch()
 {
 	return *sourceSearch->second;
+}
+
+void Arendelle::setWorkingDir(string mainDir)
+{
+	long long pos=0;
+	for(pos = mainDir.size()-1; pos >= 0; pos--)
+	{
+		if(mainDir[pos] == '/')
+		{
+			pos++;
+			break;
+		}
+	}
+	this->workingDir = mainDir.substr(0,pos);
+	cout<<"Setting Working Directory : "<<this->workingDir<<endl;
+}
+
+string Arendelle::getWorkingDir()
+{
+	return this->workingDir;
+}
+
+void Arendelle::initStoredSpaces()
+{
+	vector<boost::filesystem::path> files;
+	files = findStoredSpaceFiles(workingDir);
+	for(long long i=0 ; i < files.size(); i++)
+	{
+		string name = files[i].string();
+		long long pos = name.find(workingDir) + workingDir.size();
+		name = name.substr(pos, name.size()-pos);
+		for(long long c = 0; c<name.size(); c++)
+		{
+			if(name[c] == '/')
+				name[c] = '.';
+			else if(name[c] == '.')
+			{
+				name = name.substr(0,c);
+				break;
+			}
+		}
+		ifstream file(files[i].string());
+		long long value;
+		file >> value;
+		cout << "Init St Space : "<<value << " -> "<<name<<endl;
+		storedSpaces[name] = value;
+		file.close();
+	}
+}
+
+vector<boost::filesystem::path> Arendelle::findStoredSpaceFiles(string cDir)
+{
+	vector<boost::filesystem::path> files;
+	boost::filesystem::path cPath(cDir);
+	boost::filesystem::directory_iterator end_itr;
+	for(boost::filesystem::directory_iterator itr(cPath); itr != end_itr; ++itr)
+	{
+		if(boost::filesystem::is_regular_file(itr->path()))
+		{
+			if(itr->path().filename().string().find(".space") != string::npos)
+			{
+				files.push_back(itr->path());
+			}
+		}
+		else if(boost::filesystem::is_directory(itr->path()))
+		{
+			vector<boost::filesystem::path> newFiles = findStoredSpaceFiles(itr->path().string());
+			files.insert(files.end(), newFiles.begin(), newFiles.end() );
+		}
+	}
+	return files;
 }

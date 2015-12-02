@@ -55,8 +55,8 @@ void Arendelle::initSources()
 	sources.insert(std::make_pair("j",&screen->getCursor()->screen_height));
 	sources.insert(std::make_pair("height",&screen->getCursor()->screen_height));
 	sources.insert(std::make_pair("n",&screen->getCursor()->current_color));
-	sources.insert(std::make_pair("x",&screen->getCursor()->i));
-	sources.insert(std::make_pair("y",&screen->getCursor()->j));
+	sources.insert(std::make_pair("x",&screen->getCursor()->j));
+	sources.insert(std::make_pair("y",&screen->getCursor()->i));
 	//sources.insert(std::make_pair(,));
 }
 

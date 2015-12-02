@@ -43,6 +43,12 @@ public:
 	VInt(long long value) : value(value) {}
 };
 
+class VBool : public Value{
+public:
+	long long value;
+	VBool(long long value) : value(value) {}
+};
+
 class VFloat : public Value{
 public:
 	double value;

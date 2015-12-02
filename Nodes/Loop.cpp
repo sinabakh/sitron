@@ -10,12 +10,29 @@
 Value* NLoop::codeGen(Arendelle* arendelle)
 {
 	Value* tmpVal = new Value;
-	Value* lVal = lhs.codeGen(arendelle);
-	long long times = static_cast<VInt*>(lVal)->value;
-	std::cout<<std::endl<<"Loop : "<<times<<" times"<<std::endl<<"{"<<std::endl;
-	for(unsigned int i = 0; i<times; i++)
+	Value* lVal = lhs->codeGen(arendelle);
+	bool isBool = dynamic_cast<const VBool*>(lVal) != 0;
+	std::cout<<std::endl<<"Loop : "<<" isBool: "<<isBool;
+	if(! isBool)
 	{
-		rhs.codeGen(arendelle);
+		long long times = static_cast<VInt*>(lVal)->value;
+		std::cout<<std::endl<<times<<" times"<<std::endl<<"{"<<std::endl;
+		for(unsigned int i = 0; i<times; i++)
+		{
+			rhs->codeGen(arendelle);
+		}
+	}
+	else
+	{
+		std::cout<<std::endl<<" Till True :) "<<std::endl<<"{"<<std::endl;
+		while(true)
+		{
+			lVal = lhs->codeGen(arendelle);
+			bool canC = static_cast<VBool*>(lVal)->value;
+			if(!canC)
+				break;
+			rhs->codeGen(arendelle);
+		}
 	}
 	std::cout<<std::endl<<"End of Loop"<<std::endl<<"}"<<std::endl;
 	/*if(type == "numeric")

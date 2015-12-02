@@ -89,8 +89,7 @@ expr : mel | cmd | loop | condition | space_decl
 cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
     ;
 
-loop : TLBRACK mel TCOMMA cmd TRBRACK { $$ = new NLoop(*$2,*$4);}
-     | TLBRACK mel TCOMMA loop TRBRACK { $$ = new NLoop(*$2,*$4);}
+loop : TLBRACK mel TCOMMA expr TRBRACK { $$ = new NLoop($2,$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}
      ;
 

@@ -7,8 +7,9 @@
 class NCondition : public NExpression {
 public:
     NExpression* condition;
-    NExpression* hs;
-    NCondition(NExpression* condition, NExpression* hs) :
-        condition(condition), hs(hs) { }
+    NExpression* ths;
+    NExpression* fhs;
+    NCondition(NExpression* condition, NExpression* ths, NExpression* fhs) :
+        condition(condition), ths(ths), fhs(fhs) { }
     virtual Value* codeGen(Arendelle* arendelle);
 };

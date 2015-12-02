@@ -12,7 +12,11 @@ Value* NCondition::codeGen(Arendelle* arendelle)
 	long long conVal = static_cast<VInt*>(conValue)->value;
 	if(conVal != 0)
 	{
-		hs->codeGen(arendelle);
+		ths->codeGen(arendelle);
+	}
+	else
+	{
+		fhs->codeGen(arendelle);
 	}
 	Value* tmpVal = new Value;
 	return tmpVal;

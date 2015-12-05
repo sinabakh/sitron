@@ -24,6 +24,35 @@ void Arendelle::setScreen(Screen* screen){
 	this->screen = screen;
 }
 
+
+void Arendelle::initFunctions()
+{
+	vector<boost::filesystem::path> files;
+	files = findFunctionFiles(workingDir);
+	for(long long i=0 ; i < files.size(); i++)
+	{
+		string name = files[i].string();
+		long long pos = name.find(workingDir) + workingDir.size();
+		name = name.substr(pos, name.size()-pos);
+		for(long long c = 0; c<name.size(); c++)
+		{
+			if(name[c] == '/')
+				name[c] = '.';
+			else if(name[c] == '.')
+			{
+				name = name.substr(0,c);
+				break;
+			}
+		}
+		cout<<"Interpreting Function File: "<<files[i].string()<<endl;
+		FILE* file;
+		file = fopen(files[i].string().c_str(),"r");
+		yyin = file;
+		yyparse();
+	}
+}
+
+
 void Arendelle::addOrUpdateSpace(string name, long long value)
 {
 	this->spaces[name] = value;
@@ -181,6 +210,30 @@ void Arendelle::initStoredSpaces()
 		file.close();
 	}
 }
+
+vector<boost::filesystem::path> Arendelle::findFunctionFiles(string cDir)
+{
+	vector<boost::filesystem::path> files;
+	boost::filesystem::path cPath(cDir);
+	boost::filesystem::directory_iterator end_itr;
+	for(boost::filesystem::directory_iterator itr(cPath); itr != end_itr; ++itr)
+	{
+		if(boost::filesystem::is_regular_file(itr->path()))
+		{
+			if(itr->path().filename().string().find(".arendelle") != string::npos)
+			{
+				files.push_back(itr->path());
+			}
+		}
+		else if(boost::filesystem::is_directory(itr->path()))
+		{
+			vector<boost::filesystem::path> newFiles = findStoredSpaceFiles(itr->path().string());
+			files.insert(files.end(), newFiles.begin(), newFiles.end() );
+		}
+	}
+	return files;
+}
+
 
 vector<boost::filesystem::path> Arendelle::findStoredSpaceFiles(string cDir)
 {

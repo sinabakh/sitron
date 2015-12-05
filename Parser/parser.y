@@ -80,8 +80,18 @@ stmts : stmt { $$ = new NBlock(); $$->statements.push_back($<stmt>1); }
       | stmts stmt { $1->statements.push_back($<stmt>2); }
       ;
 
-stmt :  expr { $$ = new NExpressionStatement(*$1); } | ident{errno=ERR_UNKNOWN_CMD;yyerror("");}
+stmt : func_decl
+     | expr { $$ = new NExpressionStatement(*$1); }
+     | ident{errno=ERR_UNKNOWN_CMD;yyerror("");}
      ;
+
+func_decl : TCLT TCGT stmts
+          | TCLT func_arg TCGT stmts {$$ = new NFunction(&$2);}
+          ;
+
+func_arg : text {$$ = new vector<string>args; $$->push_back($1);}
+         | func_arg TCOMMA text {$1->push_back($3);}
+         ;
 
 expr : mel | cmd | loop | condition | space_decl
      ;

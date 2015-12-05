@@ -24,6 +24,9 @@ public:
 	Screen* getScreen();
 	void setScreen(Screen* screen);
 
+
+	void initFunctions();
+
 	void addOrUpdateSpace(string name, long long value);
 	bool spaceExist(string name);
 	long long getLastSpaceSearch();
@@ -42,6 +45,7 @@ public:
 	void setWorkingDir(string mainDir);
 	string getWorkingDir();
 
+	vector<boost::filesystem::path> findFunctionFiles(string cDir);
 	vector<boost::filesystem::path> findStoredSpaceFiles(string cDir);
 
 private:

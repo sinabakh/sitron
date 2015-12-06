@@ -9,6 +9,7 @@
 
 Arendelle::Arendelle(){
 	this->screen = new Screen(5,5);
+	this->renderEngine = new RenderEngine();
 	this->initSources();
 }
 
@@ -24,6 +25,10 @@ void Arendelle::setScreen(Screen* screen){
 	this->screen = screen;
 }
 
+void Arendelle::render()
+{
+	this->renderEngine->render();
+}
 
 int isFuncHLine(string str)
 {

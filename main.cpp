@@ -44,5 +44,6 @@ int main(int argc, char **argv)
     std::cout<<"_______________________"<<std::endl<<std::endl;
     arendelle->getScreen()->prettyPrint();
     std::cout<<std::endl;
+    arendelle->render();
     return 0;
 }

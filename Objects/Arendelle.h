@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <fstream>
 #include <boost/filesystem.hpp>
+#include "../Renderer/RenderEngine.h"
 using namespace std;
 
 #ifndef BASE_ARENDELLE_H_
@@ -25,6 +26,8 @@ public:
 	Screen* getScreen();
 	void setScreen(Screen* screen);
 
+	RenderEngine* renderEngine;
+	void render();
 
 	void initFunctions();
 	bool functionExist(string name);

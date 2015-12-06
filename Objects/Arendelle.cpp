@@ -25,6 +25,22 @@ void Arendelle::setScreen(Screen* screen){
 }
 
 
+int isFuncHLine(string str)
+{
+	if(str.find('<') != string::npos)
+		if(str.find('<') != string::npos)
+			return 1;
+	for(int i=0; i<str.size(); i++)
+	{
+		if(str[i]!=' ')
+			if(str[i] != '\t')
+				if(str[i] != '\n')
+					return -1;
+	}
+	return 0;
+}
+
+
 void Arendelle::initFunctions()
 {
 	vector<boost::filesystem::path> files;
@@ -44,11 +60,26 @@ void Arendelle::initFunctions()
 				break;
 			}
 		}
-		cout<<"Interpreting Function File: "<<files[i].string()<<endl;
-		FILE* file;
-		file = fopen(files[i].string().c_str(),"r");
-		yyin = file;
-		yyparse();
+		ifstream myfile (files[i].string());
+		string line;
+		while(getline(myfile,line))
+		{
+			int funcHSituation = isFuncHLine(line);
+			if(funcHSituation == 1)
+			{
+				string header = line;
+				cout<<"Interpreting Function File: "<<files[i].string()<<endl;
+				string codes = "";
+				while(getline(myfile,line))
+					codes = codes + line;
+				Function* func = new Function(name, header, codes);
+				functions[name] = func;
+			}
+			if(funcHSituation == -1)
+			{
+				break;
+			}
+		}
 	}
 }
 
@@ -57,6 +88,26 @@ void Arendelle::addOrUpdateSpace(string name, long long value)
 {
 	this->spaces[name] = value;
 }
+
+bool Arendelle::functionExist(string name)
+{
+	functionSearch = functions.find(name);
+	if(functionSearch != functions.end())
+	{
+	        return true;
+	}
+	else
+	{
+	        return false;
+	}
+}
+
+Function* Arendelle::getLastFunctionSearch()
+{
+	return functionSearch->second;
+}
+
+
 
 bool Arendelle::spaceExist(string name)
 {

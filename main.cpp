@@ -32,6 +32,7 @@ int main(int argc, char **argv)
     	}
     	arendelle->setWorkingDir(argv[1]);
     	arendelle->initStoredSpaces();
+    	arendelle->initFunctions();
     	yyin = file;
     }
     //char string[] = "p";

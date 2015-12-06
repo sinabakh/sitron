@@ -59,22 +59,23 @@ extern int yydebug;
     TCGT = 269,
     TCGE = 270,
     TEQUAL = 271,
-    TLBRACK = 272,
-    TRBRACK = 273,
-    TLPAREN = 274,
-    TRPAREN = 275,
-    TLBRACE = 276,
-    TRBRACE = 277,
-    TCOMMA = 278,
-    TATSIGN = 279,
-    TDOLLAR = 280,
-    TSHARP = 281,
-    TPLUS = 282,
-    TMINUS = 283,
-    TMUL = 284,
-    TDIV = 285,
-    TMOD = 286,
-    TPOW = 287
+    TNOT = 272,
+    TLBRACK = 273,
+    TRBRACK = 274,
+    TLPAREN = 275,
+    TRPAREN = 276,
+    TLBRACE = 277,
+    TRBRACE = 278,
+    TCOMMA = 279,
+    TATSIGN = 280,
+    TDOLLAR = 281,
+    TSHARP = 282,
+    TPLUS = 283,
+    TMINUS = 284,
+    TMUL = 285,
+    TDIV = 286,
+    TMOD = 287,
+    TPOW = 288
   };
 #endif
 
@@ -99,7 +100,7 @@ union YYSTYPE
     std::string *string;
     int token;
 
-#line 103 "./Parser/parser.hpp" /* yacc.c:1909  */
+#line 104 "./Parser/parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

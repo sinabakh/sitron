@@ -12,7 +12,7 @@ extern "C" int yywrap() { }
 ident [a-zA-Z_][a-zA-Z0-9_]*
 whitesp [  \t\n]
 shit (?=,)
-text  [a-zA-Z. _]*[a-zA-Z]+
+text  [a-zA-Z._]*[a-zA-Z]+
 
 %%
 
@@ -31,6 +31,7 @@ text  [a-zA-Z. _]*[a-zA-Z]+
 "="                     return TOKEN(TEQUAL);
 "=="                    return TOKEN(TCEQ);
 "!="                    return TOKEN(TCNE);
+"!"                     return TOKEN(TNOT);
 "<"                     return TOKEN(TCLT);
 "<="                    return TOKEN(TCLE);
 ">"                     return TOKEN(TCGT);

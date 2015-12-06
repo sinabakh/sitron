@@ -7,7 +7,9 @@
 
 class NFunction: public NBlock{
 public:
-	std::vector<std::string>args;
-	NFunction(args) : args(args) { }
+	NIdentifier* name;
+	std::vector<NExpression*>args;
+	NFunction(NIdentifier* name, std::vector<NExpression*> args) : name(name) , args(args) { }
+	NFunction(NIdentifier* name) : name(name) { }
 	virtual Value* codeGen(Arendelle* arendelle);
 };

@@ -4,18 +4,38 @@
  *  Created on: Dec 5, 2015
  *      Author: sina
  */
+
+#include "Base.h"
+#include "Identifier.h"
 #include "Function.h"
+#include "../Objects/Function.h"
+
+extern NBlock* programBlock;
+extern int yyparse();
+
+extern FILE* yyin;
 
 Value* NFunction::codeGen(Arendelle* arendelle)
 {
-	StatementList::const_iterator it;
-	Value* lVal = new Value;
-	        //std::cout<<"HEY : "<<statements.size()<<std::endl;
-	        for (it = statements.begin(); it != statements.end(); it++) {
-	                std::cout <<std::endl<< "Generating code for " << typeid(**it).name() << std::endl;
-	                lVal = (**it).codeGen(arendelle);
-	        }
-	        return lVal;
+	Value* resVal = new Value;
+	Value* funcNameVal = this->name->codeGen(arendelle);
+	string funcName = static_cast<VString*>(funcNameVal)->value;
+	cout<<"Running Function: "<<funcName<<endl;
+	if(!arendelle->functionExist(funcName))
+		return resVal;
+	Function* func = arendelle->getLastFunctionSearch();
+
+	cout<<"Shit Code: "<<func->code<<endl;
+
+	char* c = &func->code[0];
+	FILE* funcMem = fmemopen(c, strlen(c),"r");
+	yyin = funcMem;
+	programBlock = new NBlock();
+	yyparse();
+	if(programBlock->statements.size()!=0)
+	       programBlock->codeGen(arendelle);
+
+	return resVal;
 }
 
 

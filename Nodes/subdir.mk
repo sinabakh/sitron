@@ -7,4 +7,5 @@ CPP_SRC += \
 ./Nodes/Number.cpp \
 ./Nodes/Space.cpp \
 ./Nodes/Source.cpp \
-./Nodes/Operator.cpp
+./Nodes/Operator.cpp \
+./Nodes/Function.cpp

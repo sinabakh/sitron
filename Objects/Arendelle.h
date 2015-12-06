@@ -6,6 +6,7 @@
  */
 
 #include "Screen.h"
+#include "Function.h"
 #include <string>
 #include <unordered_map>
 #include <fstream>
@@ -26,6 +27,8 @@ public:
 
 
 	void initFunctions();
+	bool functionExist(string name);
+	Function* getLastFunctionSearch();
 
 	void addOrUpdateSpace(string name, long long value);
 	bool spaceExist(string name);
@@ -49,6 +52,9 @@ public:
 	vector<boost::filesystem::path> findStoredSpaceFiles(string cDir);
 
 private:
+	unordered_map<string, Function*>functions;
+	unordered_map<string, Function*>::iterator functionSearch;
+
 	unordered_map<string,long long>spaces;
 	unordered_map<string,long long>::iterator spaceSearch;
 

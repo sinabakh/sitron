@@ -45,7 +45,7 @@
    they represent.
  */
 %token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
-%token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
+%token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL TNOT
 %token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TATSIGN TDOLLAR TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV TMOD TPOW
 
@@ -58,11 +58,11 @@
 %type <ident> text
 %type <cmd> cmd
 //%type <space> space
-%type <expr> numeric expr loop condition space_decl source space mel term_lone term_ltwo mel_base
+%type <expr> numeric expr loop condition func_cal space_decl source space mel term_lone term_ltwo mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
-%type <block> program stmts block
-%type <stmt> stmt func_decl
+%type <block> program stmts block func_decl
+%type <stmt> stmt
 %type <token> operator_lone operator_ltwo operator_lthree
 
 /* Operator precedence for mathematical operators */
@@ -80,24 +80,18 @@ stmts : stmt { $$ = new NBlock(); $$->statements.push_back($<stmt>1); }
       | stmts stmt { $1->statements.push_back($<stmt>2); }
       ;
 
-stmt : func_decl
-     | expr { $$ = new NExpressionStatement(*$1); }
+stmt : expr {$$ = new NExpressionStatement(*$1); }
      | ident{errno=ERR_UNKNOWN_CMD;yyerror("");}
      ;
 
-func_decl : TCLT TCGT stmts
-          | TCLT func_arg TCGT stmts {$$ = new NFunction(&$2);}
-          ;
-
-func_arg : text {$$ = new vector<string>args; $$->push_back($1);}
-         | func_arg TCOMMA text {$1->push_back($3);}
-         ;
-
-expr : mel | cmd | loop | condition | space_decl
+expr : mel | cmd | loop | condition | space_decl | func_cal
      ;
 
 cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
     ;
+
+func_cal : TNOT text TLPAREN TRPAREN {$$ = new NFunction(new NIdentifier(*$2));}
+         ;
 
 loop : TLBRACK mel TCOMMA expr TRBRACK { $$ = new NLoop($2,$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}

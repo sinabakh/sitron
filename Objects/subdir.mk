@@ -1,3 +1,4 @@
 CPP_SRC += \
 ./Objects/Arendelle.cpp \
-./Objects/Screen.cpp 
+./Objects/Screen.cpp \
+./Objects/Function.cpp

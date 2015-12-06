@@ -97,10 +97,11 @@ union YYSTYPE
     //NVariableDeclaration *var_decl;
     //std::vector<NVariableDeclaration*> *varvec;
     //std::vector<NExpression*> *exprvec;
+    std::vector<NExpression*> *argvec;
     std::string *string;
     int token;
 
-#line 104 "./Parser/parser.hpp" /* yacc.c:1909  */
+#line 105 "./Parser/parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

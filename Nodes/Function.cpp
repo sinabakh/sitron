@@ -25,7 +25,14 @@ Value* NFunction::codeGen(Arendelle* arendelle)
 		return resVal;
 	Function* func = arendelle->getLastFunctionSearch();
 
-	cout<<"Shit Code: "<<func->code<<endl;
+	for(int i=0; i<this->args.size(); i++)
+	{
+		if(i >= func->args.size())
+			break;
+		Value* argVal = args[i]->codeGen(arendelle);
+		long long arg = static_cast<VInt*>(argVal)->value;
+		arendelle->addOrUpdateSpace(func->args[i],arg);
+	}
 
 	char* c = &func->code[0];
 	FILE* funcMem = fmemopen(c, strlen(c),"r");

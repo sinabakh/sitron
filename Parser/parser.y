@@ -36,6 +36,7 @@
     //NVariableDeclaration *var_decl;
     //std::vector<NVariableDeclaration*> *varvec;
     //std::vector<NExpression*> *exprvec;
+    std::vector<NExpression*> *argvec;
     std::string *string;
     int token;
 }
@@ -61,6 +62,7 @@
 %type <expr> numeric expr loop condition func_cal space_decl source space mel term_lone term_ltwo mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
+%type <argvec> func_args
 %type <block> program stmts block func_decl
 %type <stmt> stmt
 %type <token> operator_lone operator_ltwo operator_lthree
@@ -91,7 +93,12 @@ cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
     ;
 
 func_cal : TNOT text TLPAREN TRPAREN {$$ = new NFunction(new NIdentifier(*$2));}
+         |  TNOT text TLPAREN func_args TRPAREN {$$ = new NFunction(new NIdentifier(*$2),*$4);}
          ;
+
+func_args : mel {printf("Hi \n");$$ = new vector<NExpression*>; $$->push_back($1);}
+          | func_args TCOMMA mel {printf("Guys \n");$$->push_back($3);}
+          ;
 
 loop : TLBRACK mel TCOMMA expr TRBRACK { $$ = new NLoop($2,$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}

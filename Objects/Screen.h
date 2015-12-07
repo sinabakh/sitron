@@ -44,6 +44,7 @@ public:
 	void clearDot(long long i, long long j);
 	void clearDot();
 	Cursor* getCursor();
+	vector< vector<long long> > getMatrix();
 
 	void prettyPrint();
 

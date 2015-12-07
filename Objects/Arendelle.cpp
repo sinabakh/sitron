@@ -8,8 +8,8 @@
 #include "Arendelle.h"
 
 Arendelle::Arendelle(){
-	this->screen = new Screen(5,5);
-	this->renderEngine = new RenderEngine();
+	this->screen = new Screen(30,10);
+	this->renderEngine = new RenderEngine(this->screen);
 	this->initSources();
 }
 

@@ -20,26 +20,26 @@ Cursor::Cursor(long long screen_width, long long screen_height)
 void Cursor::goR(){
 	//if(this->j + 1 >= this->screen_width )
 	//	return;
-	this->j++;
+	this->i++;
 }
 
 void Cursor::goL(){
 	//if(this->j - 1 < 0 )
 	//	return;
-	this->j--;
+	this->i--;
 }
 
 void Cursor::goD(){
 	//if(this->i + 1 >= this->screen_height )
 	//	return;
-	this->i++;
+	this->j++;
 }
 
 
 void Cursor::goU(){
 	//if(this->i - 1 < 0 )
 	//	return;
-	this->i--;
+	this->j--;
 }
 
 void Cursor::nextColor(){
@@ -60,7 +60,7 @@ long long Cursor::getColor(){
 Screen::Screen(long long columns, long long rows, long long sColorLimit){
 	this->columns = columns;
 	this->rows = rows;
-	this->matrix.resize(rows, vector<long long> (columns,0));
+	this->matrix.resize(columns, vector<long long> (rows,0));
 	this->cursor = new Cursor(columns, rows);
 	this->s_color_limit = sColorLimit;
 }
@@ -68,7 +68,7 @@ Screen::Screen(long long columns, long long rows, long long sColorLimit){
 Screen::Screen(long long columns, long long rows){
 	this->columns = columns;
 	this->rows = rows;
-	this->matrix.resize(rows, vector<long long> (columns,0));
+	this->matrix.resize(columns, vector<long long> (rows,0));
 	this->cursor = new Cursor(columns, rows);
 	this->s_color_limit = 4;
 
@@ -123,8 +123,13 @@ void Screen::prettyPrint(){
 	{
 		for(unsigned long long j=0; j<this->columns; j++)
 		{
-			cout<<matrix[i][j]<<" ";
+			cout<<matrix[j][i]<<" ";
 		}
 		cout<<endl;
 	}
+}
+
+vector< vector<long long> > Screen::getMatrix()
+{
+	return this->matrix;
 }

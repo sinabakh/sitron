@@ -1,3 +1,6 @@
+#ifndef NODES_NODE_H_
+#define NODES_NODE_H_
+
 #include <iostream>
 #include <typeinfo>
 #include <vector>
@@ -22,5 +25,5 @@
 //class NExpression;
 //class NVariableDeclaration;
 
-
+#endif /* NODES_NODE_H_ */
 

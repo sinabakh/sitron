@@ -1,3 +1,6 @@
+#ifndef NODES_BASE_H_
+#define NODES_BASE_H_
+
 #include "../Objects/Arendelle.h"
 
 class NStatement;
@@ -60,3 +63,5 @@ public:
 	std::string value;
 	VString(std::string value) : value(value) {}
 };
+
+#endif /* NODES_BASE_H_ */

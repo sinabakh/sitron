@@ -1,3 +1,6 @@
+#ifndef NODES_LOOP_H_
+#define NODES_LOOP_H_
+
 class NLoop : public NExpression {
 public:
     //std::string type;
@@ -8,3 +11,4 @@ public:
     virtual Value* codeGen(Arendelle* arendelle);
 };
 
+#endif /* NODES_LOOP_H_ */

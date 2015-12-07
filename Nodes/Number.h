@@ -1,3 +1,6 @@
+#ifndef NODES_NUMBER_H_
+#define NODES_NUMBER_H_
+
 class NInteger : public NExpression {
 public:
     long long value;
@@ -12,3 +15,4 @@ public:
     //virtual llvm::Value* codeGen(CodeGenContext& context);
 };
 
+#endif /* NODES_NUMBER_H_ */

@@ -1,3 +1,6 @@
+#ifndef NODES_SPACE_H_
+#define NODES_SPACE_H_
+
 class NSAssignment : public NExpression {
 public:
     NIdentifier* lhs;
@@ -30,3 +33,4 @@ public:
 	virtual Value* codeGen(Arendelle* arendelle);
 };
 
+#endif /* NODES_SPACE_H_ */

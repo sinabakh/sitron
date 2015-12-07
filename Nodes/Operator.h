@@ -1,3 +1,6 @@
+#ifndef NODES_OPERATOR_H_
+#define NODES_OPERATOR_H_
+
 class NBinaryOperator : public NExpression {
 public:
     int op;
@@ -17,3 +20,5 @@ public:
 	        df(df), hs(hs), op(op) { }
 	    virtual Value* codeGen(Arendelle* arendelle);
 };
+
+#endif /* NODES_OPERATOR_H_ */

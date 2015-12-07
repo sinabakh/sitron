@@ -5,6 +5,10 @@
  *      Author: Sina
  */
 
+#ifndef NODES_FUNCTION_H_
+#define NODES_FUNCTION_H_
+
+
 class NFunction: public NBlock{
 public:
 	NIdentifier* name;
@@ -13,3 +17,5 @@ public:
 	NFunction(NIdentifier* name) : name(name) { }
 	virtual Value* codeGen(Arendelle* arendelle);
 };
+
+#endif /* NODES_FUNCTION_H_ */

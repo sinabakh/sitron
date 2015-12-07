@@ -13,13 +13,18 @@ Value* NLoop::codeGen(Arendelle* arendelle)
 	Value* lVal = lhs->codeGen(arendelle);
 	bool isBool = dynamic_cast<const VBool*>(lVal) != 0;
 	std::cout<<std::endl<<"Loop : "<<" isBool: "<<isBool;
+	StatementList::const_iterator it;
 	if(! isBool)
 	{
 		long long times = static_cast<VInt*>(lVal)->value;
 		std::cout<<std::endl<<times<<" times"<<std::endl<<"{"<<std::endl;
 		for(unsigned int i = 0; i<times; i++)
 		{
-			rhs->codeGen(arendelle);
+			//rhs->codeGen(arendelle);
+			for(it = statements->statements.begin(); it != statements->statements.end(); it++)
+			{
+				(*it)->codeGen(arendelle);
+			}
 		}
 	}
 	else
@@ -31,7 +36,11 @@ Value* NLoop::codeGen(Arendelle* arendelle)
 			bool canC = static_cast<VBool*>(lVal)->value;
 			if(!canC)
 				break;
-			rhs->codeGen(arendelle);
+			//rhs->codeGen(arendelle);
+			for(it = statements->statements.begin(); it != statements->statements.end(); it++)
+				{
+							(*it)->codeGen(arendelle);
+				}
 		}
 	}
 	std::cout<<std::endl<<"End of Loop"<<std::endl<<"}"<<std::endl;

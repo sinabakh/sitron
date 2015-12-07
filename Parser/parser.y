@@ -100,7 +100,7 @@ func_args : mel {printf("Hi \n");$$ = new vector<NExpression*>; $$->push_back($1
           | func_args TCOMMA mel {printf("Guys \n");$$->push_back($3);}
           ;
 
-loop : TLBRACK mel TCOMMA expr TRBRACK { $$ = new NLoop($2,$4);}
+loop : TLBRACK mel TCOMMA stmts TRBRACK { $$ = new NLoop($2,$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}
      ;
 

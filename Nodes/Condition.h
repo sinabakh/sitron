@@ -10,9 +10,9 @@
 class NCondition : public NExpression {
 public:
     NExpression* condition;
-    NExpression* ths;
-    NExpression* fhs;
-    NCondition(NExpression* condition, NExpression* ths, NExpression* fhs) :
+    NBlock* ths;
+    NBlock* fhs;
+    NCondition(NExpression* condition, NBlock* ths, NBlock* fhs) :
         condition(condition), ths(ths), fhs(fhs) { }
     virtual Value* codeGen(Arendelle* arendelle);
 };

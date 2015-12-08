@@ -104,8 +104,8 @@ loop : TLBRACK mel TCOMMA stmts TRBRACK { $$ = new NLoop($2,$4);}
      | TLBRACK mel TCOMMA TRBRACK {yyerror("Empty Loop");}
      ;
 
-condition : TLBRACE mel TCOMMA expr TRBRACE {NIdentifier* fcd = new NIdentifier("");$$ = new NCondition($2,$4,fcd);}
-          | TLBRACE mel TCOMMA expr TCOMMA expr TRBRACE {$$ = new NCondition($2,$4,$6);}
+condition : TLBRACE mel TCOMMA stmts TRBRACE {NBlock* fcd = new NBlock();$$ = new NCondition($2,$4,fcd);}
+          | TLBRACE mel TCOMMA stmts TCOMMA stmts TRBRACE {$$ = new NCondition($2,$4,$6);}
           ;
 
 space_decl : TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}

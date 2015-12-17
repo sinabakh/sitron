@@ -49,8 +49,8 @@ text  [a-zA-Z._]*[a-zA-Z]+
 "/"                     return TOKEN(TDIV);
 "%"                     return TOKEN(TMOD);
 "^"                     return TOKEN(TPOW);
-{text}                  printf("Shit1: %s",yytext);SAVE_TOKEN; return TTEXT;
-{ident}                 printf("Shit2");SAVE_TOKEN; return TIDENTIFIER;
+{text}                  SAVE_TOKEN; return TTEXT;
+{ident}                 SAVE_TOKEN; return TIDENTIFIER;
 {whitesp}+              ;
 .                       yyterminate();
 

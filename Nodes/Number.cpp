@@ -9,9 +9,13 @@
 
 Value* NInteger::codeGen(Arendelle* arendelle){
 	//std::cout<<std::endl<<"Number : "<<std::endl;
-	Value* val = new VInt(this->value);
+	Value* val = new VFloat((double)this->value);
 	return val;
 }
 
-
+Value* NDouble::codeGen(Arendelle* arendelle){
+	//std::cout<<std::endl<<"Number : "<<std::endl;
+	Value* val = new VFloat(this->value);
+	return val;
+}
 

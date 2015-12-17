@@ -34,7 +34,7 @@ Value* NSource::codeGen(Arendelle* arendelle)
 	Value* nVal = name->codeGen(arendelle);
 	std::string sName = static_cast<VString*>(nVal)->value;
 	sourceStrCorrector(&sName);
-	long long sVal;
+	double sVal;
 	if(arendelle->sourceExist(sName))
 	{
 		sVal = arendelle->getLastSourceSearch();
@@ -45,6 +45,6 @@ Value* NSource::codeGen(Arendelle* arendelle)
 		sVal = 0;
 	}
 	std::cout<<std::endl<<"Access Source : "<<sName<<" -> "<<sVal<<std::endl;
-	Value* val = new VInt(sVal);
+	Value* val = new VFloat(sVal);
 	return val;
 }

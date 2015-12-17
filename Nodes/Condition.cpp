@@ -9,7 +9,8 @@
 Value* NCondition::codeGen(Arendelle* arendelle)
 {
 	Value* conValue = condition->codeGen(arendelle);
-	long long conVal = static_cast<VInt*>(conValue)->value;
+	bool cVal = static_cast<VFloat*>(conValue)->value;
+	long long conVal = cVal;
 	if(conVal != 0)
 	{
 		ths->codeGen(arendelle);

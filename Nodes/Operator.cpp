@@ -23,22 +23,23 @@ Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 {
 	Value* resVal;
 	Value* lValue = lhs->codeGen(arendelle);
-	long long lVal = static_cast<VInt*>(lValue)->value;
+	double lVal = static_cast<VFloat*>(lValue)->value;
 
 	Value* rValue = rhs->codeGen(arendelle);
-	long long rVal = static_cast<VInt*>(rValue)->value;
+	double rVal = static_cast<VFloat*>(rValue)->value;
+	cout<<"HEY: "<<rVal<<" : "<<lVal<<endl;
 	if(this->op == TPLUS)
 	{
-		resVal = new VInt(lVal + rVal);
+		resVal = new VFloat(lVal + rVal);
 	}
 	if(this->op == TMINUS)
-		resVal = new VInt(lVal - rVal);
+		resVal = new VFloat(lVal - rVal);
 	if(this->op == TMUL)
-		resVal = new VInt(lVal * rVal);
+		resVal = new VFloat(lVal * rVal);
 	if(this->op == TDIV)
-		resVal = new VInt(lVal / rVal);
+		resVal = new VFloat(lVal / rVal);
 	if(this->op == TMOD)
-		resVal = new VInt(lVal % rVal);
+		resVal = new VFloat((double)((long long)lVal % (long long)rVal));
 	if(this->op == TPOW)
 	{
 		if(rVal < 0)
@@ -46,15 +47,16 @@ Value* NBinaryOperator::codeGen(Arendelle* arendelle)
 		    yyerror("Negative Power Not Supported. Tought Zero(0) by default!");
 		    rVal = 0;
 		}
-		long long powVal = 1;
-		for(long long i=1; i<=rVal; i++)
+		double powVal = 1.f;
+		for(double i=1; i<=rVal; i+=1)
 		    powVal *= lVal;
-		resVal = new VInt(powVal);
+		resVal = new VFloat(powVal);
 	}
 
-
 	if(this->op == TCLT)
+	{
 		resVal = new VBool(lVal < rVal);
+	}
 	if(this->op == TCLE)
 		resVal = new VBool(lVal <= rVal);
 	if(this->op == TCGT)
@@ -74,20 +76,20 @@ Value* NSingularOperator::codeGen(Arendelle* arendelle)
 {
 	Value* resVal;
 	Value* dfValue = df->codeGen(arendelle);
-	long long dfVal = static_cast<VInt*>(dfValue)->value;
+	double dfVal = static_cast<VFloat*>(dfValue)->value;
 
 	Value* hsValue = hs->codeGen(arendelle);
-	long long hsVal = static_cast<VInt*>(hsValue)->value;
+	double hsVal = static_cast<VFloat*>(hsValue)->value;
 	if(this->op == TPLUS)
 	{
-		resVal = new VInt(dfVal + hsVal);
+		resVal = new VFloat(dfVal + hsVal);
 	}
 	if(this->op == TMINUS)
-		resVal = new VInt(dfVal - hsVal);
+		resVal = new VFloat(dfVal - hsVal);
 	if(this->op == TMUL)
-		resVal = new VInt(dfVal * hsVal);
+		resVal = new VFloat(dfVal * hsVal);
 	if(this->op == TDIV)
-		resVal = new VInt(dfVal / hsVal);
+		resVal = new VFloat(dfVal / hsVal);
 	return resVal;
 	//Value* tmpVal = new Value;
 	//return tmpVal;

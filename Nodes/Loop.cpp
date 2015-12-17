@@ -16,7 +16,7 @@ Value* NLoop::codeGen(Arendelle* arendelle)
 	StatementList::const_iterator it;
 	if(! isBool)
 	{
-		long long times = static_cast<VInt*>(lVal)->value;
+		long long times = (long long)static_cast<VFloat*>(lVal)->value;
 		std::cout<<std::endl<<times<<" times"<<std::endl<<"{"<<std::endl;
 		for(unsigned int i = 0; i<times; i++)
 		{

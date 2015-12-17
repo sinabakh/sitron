@@ -35,18 +35,18 @@ public:
 
 	void addOrUpdateSpace(string name, long long value);
 	bool spaceExist(string name);
-	long long getLastSpaceSearch();
+	double getLastSpaceSearch();
 
 	void addOrUpdateStoredSpace(string name, long long value);
 	bool storedSpaceExist(string name);
-	long long getLastStoredSpaceSearch();
+	double getLastStoredSpaceSearch();
 
 	void initSources();
 	void initStoredSpaces();
 
 	bool sourceExist(string name);
 	bool isExtendedSource(string name);
-	long long getLastSourceSearch();
+	double getLastSourceSearch();
 
 	void setWorkingDir(string mainDir);
 	string getWorkingDir();
@@ -58,11 +58,11 @@ private:
 	unordered_map<string, Function*>functions;
 	unordered_map<string, Function*>::iterator functionSearch;
 
-	unordered_map<string,long long>spaces;
-	unordered_map<string,long long>::iterator spaceSearch;
+	unordered_map<string,double>spaces;
+	unordered_map<string,double>::iterator spaceSearch;
 
-	unordered_map<string,long long>storedSpaces;
-	unordered_map<string,long long>::iterator storedSpaceSearch;
+	unordered_map<string,double>storedSpaces;
+	unordered_map<string,double>::iterator storedSpaceSearch;
 
 	unordered_map<string,long long*>sources;
 	unordered_map<string,long long*>::iterator sourceSearch;

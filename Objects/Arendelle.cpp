@@ -127,9 +127,9 @@ bool Arendelle::spaceExist(string name)
 	}
 }
 
-long long Arendelle::getLastSpaceSearch()
+double Arendelle::getLastSpaceSearch()
 {
-	return spaceSearch->second;
+	return (double)spaceSearch->second;
 }
 
 
@@ -173,9 +173,9 @@ bool Arendelle::storedSpaceExist(string name)
 }
 
 
-long long Arendelle::getLastStoredSpaceSearch()
+double Arendelle::getLastStoredSpaceSearch()
 {
-	return storedSpaceSearch->second;
+	return (double)storedSpaceSearch->second;
 }
 
 
@@ -214,9 +214,9 @@ bool Arendelle::isExtendedSource(string name)
 	return false;
 }
 
-long long Arendelle::getLastSourceSearch()
+double Arendelle::getLastSourceSearch()
 {
-	return *sourceSearch->second;
+	return (double)*sourceSearch->second;
 }
 
 void Arendelle::setWorkingDir(string mainDir)
@@ -259,7 +259,7 @@ void Arendelle::initStoredSpaces()
 			}
 		}
 		ifstream file(files[i].string());
-		long long value;
+		double value;
 		file >> value;
 		cout << "Init St Space : "<<value << " -> "<<name<<endl;
 		storedSpaces[name] = value;

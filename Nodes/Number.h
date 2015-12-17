@@ -12,7 +12,7 @@ class NDouble : public NExpression {
 public:
     double value;
     NDouble(double value) : value(value) { }
-    //virtual llvm::Value* codeGen(CodeGenContext& context);
+    virtual Value* codeGen(Arendelle* arendelle);
 };
 
 #endif /* NODES_NUMBER_H_ */

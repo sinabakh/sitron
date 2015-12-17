@@ -26,7 +26,7 @@ Value* NSAssignment::codeGen(Arendelle* arendelle)
 	Value* rVal = rhs->codeGen(arendelle);
 	std::string name = static_cast<VString*>(lVal)->value;
 	spaceStrCorrector(&name);
-	long long value = static_cast<VInt*>(rVal)->value;
+	double value = static_cast<VFloat*>(rVal)->value;
 	std::cout<<std::endl<<"Define Space : "<<value<<" -> "<<name<<std::endl;
 	arendelle->addOrUpdateSpace(name,value);
 	Value* tmpValue = new Value;
@@ -38,7 +38,7 @@ Value* NSpace::codeGen(Arendelle* arendelle)
 	Value* nVal = name->codeGen(arendelle);
 	std::string sName = static_cast<VString*>(nVal)->value;
 	spaceStrCorrector(&sName);
-	long long sVal;
+	double sVal;
 	if(arendelle->spaceExist(sName))
 	{
 		sVal = arendelle->getLastSpaceSearch();
@@ -49,7 +49,7 @@ Value* NSpace::codeGen(Arendelle* arendelle)
 		sVal = 0;
 	}
 	std::cout<<std::endl<<"Access Space : "<<sName<<" -> "<<sVal<<std::endl;
-	Value* val = new VInt(sVal);
+	Value* val = new VFloat(sVal);
 	return val;
 }
 
@@ -75,7 +75,7 @@ Value* NSTSAssignment::codeGen(Arendelle* arendelle)
 	Value* rVal = rhs->codeGen(arendelle);
 	std::string name = static_cast<VString*>(lVal)->value;
 	stSpaceStrCorrector(&name);
-	long long value = static_cast<VInt*>(rVal)->value;
+	double value = static_cast<VFloat*>(rVal)->value;
 	std::cout<<std::endl<<"Define Stored Space : "<<value<<" -> "<<name<<std::endl;
 	arendelle->addOrUpdateStoredSpace(name,value);
 	Value* tmpValue = new Value;
@@ -87,7 +87,7 @@ Value* NSTSpace::codeGen(Arendelle* arendelle)
 	Value* nVal = name->codeGen(arendelle);
 	std::string sName = static_cast<VString*>(nVal)->value;
 	stSpaceStrCorrector(&sName);
-	long long sVal;
+	double sVal;
 	if(arendelle->storedSpaceExist(sName))
 	{
 		sVal = arendelle->getLastStoredSpaceSearch();
@@ -98,7 +98,7 @@ Value* NSTSpace::codeGen(Arendelle* arendelle)
 		sVal = 0;
 	}
 	std::cout<<std::endl<<"Access Stored Space : "<<sName<<" -> "<<sVal<<std::endl;
-	Value* val = new VInt(sVal);
+	Value* val = new VFloat(sVal);
 	return val;
 }
 

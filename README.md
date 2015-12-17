@@ -10,9 +10,10 @@ Running `Makefile` by `make` command will build the code and you will have an `a
 - [Boost Filesystem](https://github.com/boostorg/filesystem)
 - [Flex](http://flex.sourceforge.net/)
 - [Bison](https://www.gnu.org/software/bison/)
+- [SFML](https://github.com/SFML/SFML)
 
 ## How Things Work
-Everytime you run `arendelle`, the [main.cpp](https://github.com/arendelle/sitron/blob/master/main.cpp) 
+Everytime you run `arendelle`, the [main.cpp](https://github.com/arendelle/sitron/blob/master/main.cpp)
 will be the arendelle starting point. And from there you can trace the program work flow.
 
 Here is a brief description for folders and few files:
@@ -27,20 +28,20 @@ Here is a brief description for folders and few files:
 
 * [Nodes/](https://github.com/arendelle/sitron/tree/master/Nodes): The directory where our ATS nodes codes are.
 
-* [Objects/](https://github.com/arendelle/sitron/tree/master/Objects): The directory where actual Arendelle codes are. 
+* [Objects/](https://github.com/arendelle/sitron/tree/master/Objects): The directory where actual Arendelle codes are.
 
+* [Renderer/](https://github.com/arendelle/sitron/tree/master/Renderer): The directory where Rendering codes are.
 
 ### Not Implemented Features
 * Arrays
-* `e` and `rnd` Commands
-* Floating Point Numbers
+* `e` Command
 
 ### Buggy Features
 * Whitespaces in between spaces name characters
 
 
 ### Features To Add
-* A Render Engine
+* A Colorful Render Engine
 
 ## License
      DO WHAT THE HELL YOU WANT TO PUBLIC LICENSE

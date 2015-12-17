@@ -188,12 +188,14 @@ void Arendelle::initSources()
 	sources.insert(std::make_pair("n",&screen->getCursor()->current_color));
 	sources.insert(std::make_pair("x",&screen->getCursor()->j));
 	sources.insert(std::make_pair("y",&screen->getCursor()->i));
+
 	//sources.insert(std::make_pair(,));
 }
 
 
 bool Arendelle::sourceExist(string name)
 {
+	extendedSource = false;
 	sourceSearch = sources.find(name);
 	if(sourceSearch != sources.end())
 	{
@@ -201,6 +203,11 @@ bool Arendelle::sourceExist(string name)
 	}
 	else
 	{
+		if(isExtendedSource(name))
+		{
+			extendedSource = true;
+			return true;
+		}
 		return false;
 	}
 }
@@ -208,14 +215,23 @@ bool Arendelle::sourceExist(string name)
 bool Arendelle::isExtendedSource(string name)
 {
 	if(name == "rnd")
+	{
+		srand (time(NULL));
+		extendedSourceVal = ((double) rand() / (RAND_MAX));
 		return true;
+	}
 	if(name == "pi")
+	{
+		extendedSourceVal = 3.14;
 		return true;
+	}
 	return false;
 }
 
 double Arendelle::getLastSourceSearch()
 {
+	if(extendedSource == true)
+		return extendedSourceVal;
 	return (double)*sourceSearch->second;
 }
 

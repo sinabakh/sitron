@@ -8,6 +8,8 @@
 #include "Screen.h"
 #include "Function.h"
 #include <string>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 #include <unordered_map>
 #include <fstream>
 #include <boost/filesystem.hpp>
@@ -66,6 +68,9 @@ private:
 
 	unordered_map<string,long long*>sources;
 	unordered_map<string,long long*>::iterator sourceSearch;
+	bool extendedSource = false;
+	double extendedSourceVal;
+
 	Screen* screen;
 	string workingDir;
 };

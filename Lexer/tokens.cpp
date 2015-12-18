@@ -955,12 +955,12 @@ return TOKEN(TPOW);
 case 32:
 YY_RULE_SETUP
 #line 52 "./Lexer/tokens.l"
-printf("Shit1: %s",yytext);SAVE_TOKEN; return TTEXT;
+SAVE_TOKEN; return TTEXT;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 53 "./Lexer/tokens.l"
-printf("Shit2");SAVE_TOKEN; return TIDENTIFIER;
+SAVE_TOKEN; return TIDENTIFIER;
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */

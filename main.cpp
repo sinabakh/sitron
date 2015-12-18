@@ -4,6 +4,7 @@
 #include "Objects/Arendelle.h"
 #include "Objects/Screen.h"
 #include "Parser/parser.hpp"
+//#include <thread>
 
 //typedef struct yy_buffer_state * YY_BUFFER_STATE;
 //extern YY_BUFFER_STATE yy_scan_string(char * str);
@@ -39,6 +40,8 @@ int main(int argc, char **argv)
 	yyin = file;
 	//char string[] = "p";
 	//YY_BUFFER_STATE buffer = yy_scan_string(string);
+	std::thread renderer = arendelle->spawnRenderer();
+	//renderer.join();
 	yyparse();
 	//yy_delete_buffer(buffer);
 	if(programBlock->statements.size()!=0)
@@ -46,6 +49,7 @@ int main(int argc, char **argv)
 	std::cout<<"_______________________"<<std::endl<<std::endl;
 	//arendelle->getScreen()->prettyPrint();
 	//std::cout<<std::endl;
-	arendelle->render();
+	//arendelle->render();
+	renderer.join();
 	return 0;
 }

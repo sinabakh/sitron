@@ -12,6 +12,7 @@
 #include <time.h>       /* time */
 #include <unordered_map>
 #include <fstream>
+#include <thread>
 #include <boost/filesystem.hpp>
 #include "../Renderer/RenderEngine.h"
 using namespace std;
@@ -19,6 +20,7 @@ using namespace std;
 #ifndef BASE_ARENDELLE_H_
 #define BASE_ARENDELLE_H_
 
+//#include <thread>
 
 class Arendelle{
 public:
@@ -30,6 +32,10 @@ public:
 
 	RenderEngine* renderEngine;
 	void render();
+
+	std::thread spawnRenderer() {
+	    return std::thread(&Arendelle::render, this);
+	}
 
 	void initFunctions();
 	bool functionExist(string name);

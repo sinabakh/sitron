@@ -28,7 +28,7 @@ void RenderEngine::initWindow()
 
 void RenderEngine::render()
 {
-	this->matrix = this->sceen->getMatrix();
+	//this->matrix = this->sceen->getMatrix();
 	initWindow();
 
     while (window.isOpen())
@@ -41,6 +41,7 @@ void RenderEngine::render()
 	}
 
 	window.clear();
+	this->matrix = this->sceen->getMatrix();
 	for(long long x = 0; x<matrix.size(); x++)
 	{
 		for(long long y=0; y<matrix[0].size(); y++)

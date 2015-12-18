@@ -44,8 +44,8 @@ int main(int argc, char **argv)
 	if(programBlock->statements.size()!=0)
 		programBlock->codeGen(arendelle);
 	std::cout<<"_______________________"<<std::endl<<std::endl;
-	arendelle->getScreen()->prettyPrint();
-	std::cout<<std::endl;
+	//arendelle->getScreen()->prettyPrint();
+	//std::cout<<std::endl;
 	arendelle->render();
 	return 0;
 }

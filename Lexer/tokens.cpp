@@ -736,7 +736,7 @@ YY_DECL
 		}
 
 	{
-#line 17 "./Lexer/tokens.l"
+#line 16 "./Lexer/tokens.l"
 
 
 #line 743 "./Lexer/tokens.cpp"
@@ -798,184 +798,184 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 19 "./Lexer/tokens.l"
+#line 18 "./Lexer/tokens.l"
 ;
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 21 "./Lexer/tokens.l"
+#line 20 "./Lexer/tokens.l"
 ;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "./Lexer/tokens.l"
+#line 22 "./Lexer/tokens.l"
 SAVE_TOKEN; return TSPACE;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 24 "./Lexer/tokens.l"
+#line 23 "./Lexer/tokens.l"
 SAVE_TOKEN; return TSOURCE;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 25 "./Lexer/tokens.l"
+#line 24 "./Lexer/tokens.l"
 SAVE_TOKEN; return TCMD;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 26 "./Lexer/tokens.l"
+#line 25 "./Lexer/tokens.l"
 SAVE_TOKEN; return TINTEGER;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 27 "./Lexer/tokens.l"
+#line 26 "./Lexer/tokens.l"
 SAVE_TOKEN; return TDOUBLE;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 28 "./Lexer/tokens.l"
+#line 27 "./Lexer/tokens.l"
 return TOKEN(TATSIGN);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 29 "./Lexer/tokens.l"
+#line 28 "./Lexer/tokens.l"
 return TOKEN(TDOLLAR);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 30 "./Lexer/tokens.l"
+#line 29 "./Lexer/tokens.l"
 return TOKEN(TSHARP);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 31 "./Lexer/tokens.l"
+#line 30 "./Lexer/tokens.l"
 return TOKEN(TEQUAL);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 32 "./Lexer/tokens.l"
+#line 31 "./Lexer/tokens.l"
 return TOKEN(TCEQ);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 33 "./Lexer/tokens.l"
+#line 32 "./Lexer/tokens.l"
 return TOKEN(TCNE);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 34 "./Lexer/tokens.l"
+#line 33 "./Lexer/tokens.l"
 return TOKEN(TNOT);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "./Lexer/tokens.l"
+#line 34 "./Lexer/tokens.l"
 return TOKEN(TCLT);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 36 "./Lexer/tokens.l"
+#line 35 "./Lexer/tokens.l"
 return TOKEN(TCLE);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 37 "./Lexer/tokens.l"
+#line 36 "./Lexer/tokens.l"
 return TOKEN(TCGT);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 38 "./Lexer/tokens.l"
+#line 37 "./Lexer/tokens.l"
 return TOKEN(TCGE);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 39 "./Lexer/tokens.l"
+#line 38 "./Lexer/tokens.l"
 return TOKEN(TLPAREN);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 40 "./Lexer/tokens.l"
+#line 39 "./Lexer/tokens.l"
 return TOKEN(TRPAREN);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 41 "./Lexer/tokens.l"
+#line 40 "./Lexer/tokens.l"
 return TOKEN(TLBRACK);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 42 "./Lexer/tokens.l"
+#line 41 "./Lexer/tokens.l"
 return TOKEN(TRBRACK);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 43 "./Lexer/tokens.l"
+#line 42 "./Lexer/tokens.l"
 return TOKEN(TLBRACE);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 44 "./Lexer/tokens.l"
+#line 43 "./Lexer/tokens.l"
 return TOKEN(TRBRACE);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 45 "./Lexer/tokens.l"
+#line 44 "./Lexer/tokens.l"
 return TOKEN(TCOMMA);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 46 "./Lexer/tokens.l"
+#line 45 "./Lexer/tokens.l"
 return TOKEN(TPLUS);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 47 "./Lexer/tokens.l"
+#line 46 "./Lexer/tokens.l"
 return TOKEN(TMINUS);
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 48 "./Lexer/tokens.l"
+#line 47 "./Lexer/tokens.l"
 return TOKEN(TMUL);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 49 "./Lexer/tokens.l"
+#line 48 "./Lexer/tokens.l"
 return TOKEN(TDIV);
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 50 "./Lexer/tokens.l"
+#line 49 "./Lexer/tokens.l"
 return TOKEN(TMOD);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 51 "./Lexer/tokens.l"
+#line 50 "./Lexer/tokens.l"
 return TOKEN(TPOW);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 52 "./Lexer/tokens.l"
+#line 51 "./Lexer/tokens.l"
 SAVE_TOKEN; return TTEXT;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 53 "./Lexer/tokens.l"
+#line 52 "./Lexer/tokens.l"
 SAVE_TOKEN; return TIDENTIFIER;
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 54 "./Lexer/tokens.l"
+#line 53 "./Lexer/tokens.l"
 ;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 55 "./Lexer/tokens.l"
+#line 54 "./Lexer/tokens.l"
 yyterminate();
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 57 "./Lexer/tokens.l"
+#line 56 "./Lexer/tokens.l"
 ECHO;
 	YY_BREAK
 #line 982 "./Lexer/tokens.cpp"
@@ -1973,7 +1973,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 56 "./Lexer/tokens.l"
+#line 55 "./Lexer/tokens.l"
 
 
 

@@ -11,7 +11,6 @@ extern "C" int yywrap() { }
 
 ident [a-zA-Z_][a-zA-Z0-9_]*
 whitesp [  \t\n]
-shit (?=,)
 text  [a-zA-Z._]*[a-zA-Z]+
 
 %%

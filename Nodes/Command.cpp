@@ -30,6 +30,8 @@ Value* NCommand::codeGen(Arendelle* arendelle)
 			arendelle->getScreen()->clearDot();
 		if(*it == 'i')
 			arendelle->getScreen()->getCursor()->jumpToStart();
+		if(*it == 'w')
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 	return tmpVal;
 }

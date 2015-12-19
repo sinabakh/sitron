@@ -7,6 +7,7 @@
 
 #include "Screen.h"
 #include "Function.h"
+//#include "../mingw.thread.h"
 #include <string>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */

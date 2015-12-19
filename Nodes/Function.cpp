@@ -35,7 +35,11 @@ Value* NFunction::codeGen(Arendelle* arendelle)
 	}
 
 	char* c = &func->code[0];
-	FILE* funcMem = fmemopen(c, strlen(c),"r");
+	char *cmd = new char [strlen(c)+16];
+	FILE* funcMem; //= fmemopen(c, strlen(c),"r");
+	//cmd=malloc(strlen(c)+16);
+	sprintf(cmd, "echo %s", c);
+	funcMem = popen(cmd,"r");
 	yyin = funcMem;
 	programBlock = new NBlock();
 	yyparse();

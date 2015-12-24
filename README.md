@@ -34,7 +34,6 @@ Here is a brief description for folders and few files:
 
 ### Not Implemented Features
 * Arrays
-* `e` Command
 
 ### Buggy Features
 * Whitespaces in between spaces name characters

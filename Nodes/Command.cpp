@@ -10,7 +10,8 @@
 Value* NCommand::codeGen(Arendelle* arendelle)
 {
 	std::cout<<std::endl<<"Command : "<<cmd<<std::endl;
-	Value* tmpVal = new Value;
+	Value* resVal = new Value;
+	resVal = new VResult(1);
 	std::string::iterator it;
 	for(it= this->cmd.begin(); it != this->cmd.end(); it++)
 	{
@@ -30,10 +31,12 @@ Value* NCommand::codeGen(Arendelle* arendelle)
 			arendelle->getScreen()->clearDot();
 		if(*it == 'i')
 			arendelle->getScreen()->getCursor()->jumpToStart();
+		if(*it == 'e')
+			resVal = new VResult(0);
 		if(*it == 'w')
 			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
-	return tmpVal;
+	return resVal;
 }
 
 

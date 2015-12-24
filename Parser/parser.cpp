@@ -1403,13 +1403,13 @@ yyreduce:
 
   case 16:
 #line 99 "./Parser/parser.y" /* yacc.c:1646  */
-    {printf("Hi \n");(yyval.argvec) = new vector<NExpression*>; (yyval.argvec)->push_back((yyvsp[0].expr));}
+    {(yyval.argvec) = new vector<NExpression*>; (yyval.argvec)->push_back((yyvsp[0].expr));}
 #line 1408 "./Parser/parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 100 "./Parser/parser.y" /* yacc.c:1646  */
-    {printf("Guys \n");(yyval.argvec)->push_back((yyvsp[0].expr));}
+    {(yyval.argvec)->push_back((yyvsp[0].expr));}
 #line 1414 "./Parser/parser.cpp" /* yacc.c:1646  */
     break;
 

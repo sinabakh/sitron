@@ -96,8 +96,8 @@ func_cal : TNOT text TLPAREN TRPAREN {$$ = new NFunction(new NIdentifier(*$2));}
          |  TNOT text TLPAREN func_args TRPAREN {$$ = new NFunction(new NIdentifier(*$2),*$4);}
          ;
 
-func_args : mel {printf("Hi \n");$$ = new vector<NExpression*>; $$->push_back($1);}
-          | func_args TCOMMA mel {printf("Guys \n");$$->push_back($3);}
+func_args : mel {$$ = new vector<NExpression*>; $$->push_back($1);}
+          | func_args TCOMMA mel {$$->push_back($3);}
           ;
 
 loop : TLBRACK mel TCOMMA stmts TRBRACK { $$ = new NLoop($2,$4);}

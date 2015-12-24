@@ -40,6 +40,12 @@ public:
 	virtual ~Value(){}
 };
 
+class VResult : public Value{
+public:
+	int value;
+	VResult(long long value) : value(value) {}
+};
+
 class VInt : public Value{
 public:
 	long long value;

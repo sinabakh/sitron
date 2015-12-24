@@ -21,7 +21,7 @@ text  [a-zA-Z._]*[a-zA-Z]+
 
 [@]+{text}              SAVE_TOKEN; return TSPACE;
 ["#"]{text}             SAVE_TOKEN; return TSOURCE;
-[p|r|d|l|u|n|c|i|w]+    SAVE_TOKEN; return TCMD;
+[p|r|d|l|u|n|c|i|w|e]+    SAVE_TOKEN; return TCMD;
 [0-9]+                  SAVE_TOKEN; return TINTEGER;
 [0-9]+[.][0-9]+         SAVE_TOKEN; return TDOUBLE;
 "@"                     return TOKEN(TATSIGN);

@@ -9,7 +9,7 @@
 
 Value* NLoop::codeGen(Arendelle* arendelle)
 {
-	Value* tmpVal = new Value;
+	Value* resVal = new Value;
 	Value* lVal = lhs->codeGen(arendelle);
 	bool isBool = dynamic_cast<const VBool*>(lVal) != 0;
 	std::cout<<std::endl<<"Loop : "<<" isBool: "<<isBool;
@@ -23,7 +23,10 @@ Value* NLoop::codeGen(Arendelle* arendelle)
 			//rhs->codeGen(arendelle);
 			for(it = statements->statements.begin(); it != statements->statements.end(); it++)
 			{
-				(*it)->codeGen(arendelle);
+				Value* tmpVal = new Value;
+				tmpVal = (*it)->codeGen(arendelle);
+				if(static_cast<VResult*>(tmpVal)->value == 0)
+					return resVal;
 			}
 		}
 	}
@@ -39,7 +42,10 @@ Value* NLoop::codeGen(Arendelle* arendelle)
 			//rhs->codeGen(arendelle);
 			for(it = statements->statements.begin(); it != statements->statements.end(); it++)
 				{
-							(*it)->codeGen(arendelle);
+					Value* tmpVal = new Value;
+					tmpVal = (*it)->codeGen(arendelle);
+					if(static_cast<VResult*>(tmpVal)->value == 0)
+						return resVal;
 				}
 		}
 	}
@@ -52,7 +58,7 @@ Value* NLoop::codeGen(Arendelle* arendelle)
 			rhs.codeGen(arendelle);
 		}
 	}*/
-	return tmpVal;
+	return resVal;
 }
 
 

@@ -48,8 +48,8 @@ public:
 	double getLastSpaceSearch(long long index);
 	double getLastSpaceSearch();
 
-	void addOrUpdateStoredSpace(string name, long long value);
-	void addOrUpdateStoredSpace(string name, long long value, long long index);
+	void addOrUpdateStoredSpace(string name, double value);
+	void addOrUpdateStoredSpace(string name, double value, long long index);
 	bool storedSpaceExist(string name);
 	double getLastStoredSpaceSearch(long long index);
 	double getLastStoredSpaceSearch();

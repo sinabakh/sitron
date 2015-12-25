@@ -149,7 +149,7 @@ double Arendelle::getLastSpaceSearch()
 }
 
 
-void Arendelle::addOrUpdateStoredSpace(string name, long long value, long long index)
+void Arendelle::addOrUpdateStoredSpace(string name, double value, long long index)
 {
 	if(index+1 > this->storedSpaces[name].size())
 			this->storedSpaces[name].resize(index+1);
@@ -177,7 +177,7 @@ void Arendelle::addOrUpdateStoredSpace(string name, long long value, long long i
 	sFile.close();
 }
 
-void Arendelle::addOrUpdateStoredSpace(string name, long long value)
+void Arendelle::addOrUpdateStoredSpace(string name, double value)
 {
 	addOrUpdateStoredSpace(name, value, 0);
 }

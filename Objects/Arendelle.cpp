@@ -92,6 +92,7 @@ void Arendelle::addOrUpdateSpace(string name, double value, long long index)
 {
 	if(index+1 > spaces[name].size())
 	{
+		cout<<"Dayus: "<<index<<endl;
 		this->spaces[name].resize(index+1);
 	}
 	this->spaces[name][index] = value;

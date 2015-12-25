@@ -108,7 +108,8 @@ condition : TLBRACE mel TCOMMA stmts TRBRACE {NBlock* fcd = new NBlock();$$ = ne
           | TLBRACE mel TCOMMA stmts TCOMMA stmts TRBRACE {$$ = new NCondition($2,$4,$6);}
           ;
 
-space_decl : TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
+space_decl : TLPAREN text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {$$ = new NSInAssignment($2, $7, $4);}
+           | TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
            | TLPAREN TDOLLAR text TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSAssignment($3,$5);}
       ;
 

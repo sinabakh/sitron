@@ -42,8 +42,8 @@ Value* NSInAssignment::codeGen(Arendelle* arendelle)
 	std::string name = static_cast<VString*>(lVal)->value;
 	spaceStrCorrector(&name);
 	double value = static_cast<VFloat*>(rVal)->value;
-	long long inValue = static_cast<VInt*>(inVal)->value;
-	std::cout<<std::endl<<"Define Space : "<<value<<" -> "<<name<<std::endl;
+	long long inValue = (long long)static_cast<VFloat*>(inVal)->value;
+	std::cout<<std::endl<<"Define Space : "<<value<<" -> "<<name<< "| index: "<<inValue<<std::endl;
 	arendelle->addOrUpdateSpace(name, value, inValue);
 	Value* tmpValue = new Value;
 	tmpValue = new VResult(1);
@@ -76,7 +76,7 @@ Value* NInSpace::codeGen(Arendelle* arendelle)
 	Value* nVal = name->codeGen(arendelle);
 	std::string sName = static_cast<VString*>(nVal)->value;
 	Value* inVal = this->index->codeGen(arendelle);
-	long long inValue = static_cast<VInt*>(inVal)->value;
+	long long inValue = (long long)static_cast<VFloat*>(inVal)->value;
 	spaceStrCorrector(&sName);
 	double sVal;
 	if(arendelle->spaceExist(sName))
@@ -88,7 +88,7 @@ Value* NInSpace::codeGen(Arendelle* arendelle)
 		yywarning("Non Defined Space, Thought Zero(0) by Default!");
 		sVal = 0;
 	}
-	std::cout<<std::endl<<"Access Space : "<<sName<<" -> "<<sVal<<std::endl;
+	std::cout<<std::endl<<"Access Space : "<<sName<<" -> "<<sVal<<"| index: "<<inValue<<std::endl;
 	Value* val = new VFloat(sVal);
 	return val;
 }
@@ -127,7 +127,7 @@ Value* NSTSInAssignment::codeGen(Arendelle* arendelle)
 	Value* lVal = lhs->codeGen(arendelle);
 	Value* rVal = rhs->codeGen(arendelle);
 	Value* inVal = this->index->codeGen(arendelle);
-	long long inValue = static_cast<VInt*>(inVal)->value;
+	long long inValue = (long long)static_cast<VFloat*>(inVal)->value;
 	std::string name = static_cast<VString*>(lVal)->value;
 	stSpaceStrCorrector(&name);
 	double value = static_cast<VFloat*>(rVal)->value;
@@ -162,7 +162,7 @@ Value* NSTInSpace::codeGen(Arendelle* arendelle)
 	Value* nVal = name->codeGen(arendelle);
 	std::string sName = static_cast<VString*>(nVal)->value;
 	Value* inVal = this->index->codeGen(arendelle);
-	long long inValue = static_cast<VInt*>(inVal)->value;
+	long long inValue = (long long)static_cast<VFloat*>(inVal)->value;
 	stSpaceStrCorrector(&sName);
 	double sVal;
 	if(arendelle->storedSpaceExist(sName))

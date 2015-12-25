@@ -112,7 +112,8 @@ space_decl : TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
            | TLPAREN TDOLLAR text TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSAssignment($3,$5);}
       ;
 
-space : TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
+space : TSPACE TLBRACK mel TRBRACK {NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NInSpace(tmp, $3);}
+      | TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
       | TDOLLAR text {$$ = new NSTSpace($2);}
       ;
 

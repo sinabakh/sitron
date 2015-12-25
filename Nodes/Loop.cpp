@@ -10,6 +10,7 @@
 Value* NLoop::codeGen(Arendelle* arendelle)
 {
 	Value* resVal = new Value;
+	resVal = new VResult(1);
 	Value* lVal = lhs->codeGen(arendelle);
 	bool isBool = dynamic_cast<const VBool*>(lVal) != 0;
 	std::cout<<std::endl<<"Loop : "<<" isBool: "<<isBool;

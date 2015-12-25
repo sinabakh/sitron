@@ -20,6 +20,7 @@ Value* NCondition::codeGen(Arendelle* arendelle)
 		fhs->codeGen(arendelle);
 	}
 	Value* tmpVal = new Value;
+	tmpVal = new VResult(1);
 	return tmpVal;
 }
 

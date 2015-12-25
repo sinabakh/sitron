@@ -42,8 +42,8 @@ public:
 	bool functionExist(string name);
 	Function* getLastFunctionSearch();
 
-	void addOrUpdateSpace(string name, long long value, long long index);
-	void addOrUpdateSpace(string name, long long value);
+	void addOrUpdateSpace(string name, double value, long long index);
+	void addOrUpdateSpace(string name, double value);
 	bool spaceExist(string name);
 	double getLastSpaceSearch(long long index);
 	double getLastSpaceSearch();

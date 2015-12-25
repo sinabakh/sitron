@@ -101,6 +101,8 @@ void Screen::paint(){
 	//this->paint(cursor->i, cursor->j);
 	if(cursor->i >= this->columns || cursor->j >= this->rows)
 		return;
+	if(cursor->i < 0 || cursor->j < 0)
+			return;
 	this->paint(cursor->i, cursor->j);
 }
 

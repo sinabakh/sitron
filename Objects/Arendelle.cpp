@@ -88,7 +88,7 @@ void Arendelle::initFunctions()
 	}
 }
 
-void Arendelle::addOrUpdateSpace(string name, long long value, long long index)
+void Arendelle::addOrUpdateSpace(string name, double value, long long index)
 {
 	if(index+1 > spaces[name].size())
 	{
@@ -98,7 +98,7 @@ void Arendelle::addOrUpdateSpace(string name, long long value, long long index)
 }
 
 
-void Arendelle::addOrUpdateSpace(string name, long long value)
+void Arendelle::addOrUpdateSpace(string name, double value)
 {
 	addOrUpdateSpace(name, value, 0);
 }

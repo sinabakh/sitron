@@ -30,6 +30,7 @@ Value* NSAssignment::codeGen(Arendelle* arendelle)
 	std::cout<<std::endl<<"Define Space : "<<value<<" -> "<<name<<std::endl;
 	arendelle->addOrUpdateSpace(name,value);
 	Value* tmpValue = new Value;
+	tmpValue = new VResult(1);
 	return tmpValue;
 }
 

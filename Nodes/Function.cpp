@@ -18,6 +18,7 @@ extern FILE* yyin;
 Value* NFunction::codeGen(Arendelle* arendelle)
 {
 	Value* resVal = new Value;
+	resVal = new VResult(1);
 	Value* funcNameVal = this->name->codeGen(arendelle);
 	string funcName = static_cast<VString*>(funcNameVal)->value;
 	cout<<"Running Function: "<<funcName<<endl;

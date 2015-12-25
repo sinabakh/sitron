@@ -88,10 +88,19 @@ void Arendelle::initFunctions()
 	}
 }
 
+void Arendelle::addOrUpdateSpace(string name, long long value, long long index)
+{
+	if(index+1 > spaces[name].size())
+	{
+		this->spaces[name].resize(index+1);
+	}
+	this->spaces[name][index] = value;
+}
+
 
 void Arendelle::addOrUpdateSpace(string name, long long value)
 {
-	this->spaces[name] = value;
+	addOrUpdateSpace(name, value, 0);
 }
 
 bool Arendelle::functionExist(string name)
@@ -127,15 +136,24 @@ bool Arendelle::spaceExist(string name)
 	}
 }
 
+double Arendelle::getLastSpaceSearch(long long index)
+{
+	if(index+1 > spaceSearch->second.size())
+		return 0;
+	return (double)spaceSearch->second[index];
+}
+
 double Arendelle::getLastSpaceSearch()
 {
-	return (double)spaceSearch->second;
+	return getLastSpaceSearch(0);
 }
 
 
-void Arendelle::addOrUpdateStoredSpace(string name, long long value)
+void Arendelle::addOrUpdateStoredSpace(string name, long long value, long long index)
 {
-	this->storedSpaces[name] = value;
+	if(index+1 > this->storedSpaces[name].size())
+			this->storedSpaces[name].resize(index+1);
+	this->storedSpaces[name][index] = value;
 	long long pos = 0;
 	string folders="";
 	for(long long i = 0; i<name.size(); i++)
@@ -154,10 +172,15 @@ void Arendelle::addOrUpdateStoredSpace(string name, long long value)
 	}
 	string filename = this->workingDir + name + ".space";
 	ofstream sFile (filename);
-	sFile << value;
+	for(long long i=0; i<storedSpaces[name].size(); i++)
+		sFile << storedSpaces[name][i];
 	sFile.close();
 }
 
+void Arendelle::addOrUpdateStoredSpace(string name, long long value)
+{
+	addOrUpdateStoredSpace(name, value, 0);
+}
 
 bool Arendelle::storedSpaceExist(string name)
 {
@@ -173,9 +196,16 @@ bool Arendelle::storedSpaceExist(string name)
 }
 
 
+double Arendelle::getLastStoredSpaceSearch(long long index)
+{
+	if(index+1 > storedSpaceSearch->second.size())
+			return 0;
+	return (double)storedSpaceSearch->second[index];
+}
+
 double Arendelle::getLastStoredSpaceSearch()
 {
-	return (double)storedSpaceSearch->second;
+	return getLastStoredSpaceSearch(0);
 }
 
 
@@ -275,10 +305,12 @@ void Arendelle::initStoredSpaces()
 			}
 		}
 		ifstream file(files[i].string());
+		vector<double> values;
 		double value;
-		file >> value;
+		while(file >> value)
+			values.push_back(value);
 		cout << "Init St Space : "<<value << " -> "<<name<<endl;
-		storedSpaces[name] = value;
+		storedSpaces[name] = values;
 		file.close();
 	}
 }

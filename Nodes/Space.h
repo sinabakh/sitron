@@ -20,6 +20,15 @@ public:
     virtual Value* codeGen(Arendelle* arendelle);
 };
 
+class NSArrAssignment : public NExpression {
+public:
+    NIdentifier* lhs;
+    vector<NExpression*> indexes;
+    NSArrAssignment(NIdentifier* lhs, vector<NExpression*> indexes) :
+        lhs(lhs), indexes(indexes){ }
+    virtual Value* codeGen(Arendelle* arendelle);
+};
+
 class NSpace : public NExpression {
 public:
 	NIdentifier* name;
@@ -51,6 +60,15 @@ public:
     NExpression* index;
     NSTSInAssignment(NIdentifier* lhs, NExpression* rhs, NExpression* index) :
         lhs(lhs), rhs(rhs), index(index){ }
+    virtual Value* codeGen(Arendelle* arendelle);
+};
+
+class NSTSArrAssignment : public NExpression {
+public:
+    NIdentifier* lhs;
+    vector<NExpression*> indexes;
+    NSTSArrAssignment(NIdentifier* lhs, vector<NExpression*> indexes) :
+        lhs(lhs), indexes(indexes){ }
     virtual Value* codeGen(Arendelle* arendelle);
 };
 

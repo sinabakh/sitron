@@ -47,7 +47,7 @@
  */
 %token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL TNOT
-%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TATSIGN TDOLLAR TSHARP
+%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TSEMCOLN TATSIGN TDOLLAR TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV TMOD TPOW
 
 /* Define the type of node our nonterminal symbols represent.
@@ -62,7 +62,7 @@
 %type <expr> numeric expr loop condition func_cal space_decl source space mel term_lone term_ltwo mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
-%type <argvec> func_args
+%type <argvec> func_args mel_arr
 %type <block> program stmts block func_decl
 %type <stmt> stmt
 %type <token> operator_lone operator_ltwo operator_lthree
@@ -108,9 +108,11 @@ condition : TLBRACE mel TCOMMA stmts TRBRACE {NBlock* fcd = new NBlock();$$ = ne
           | TLBRACE mel TCOMMA stmts TCOMMA stmts TRBRACE {$$ = new NCondition($2,$4,$6);}
           ;
 
-space_decl : TLPAREN text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {$$ = new NSInAssignment($2, $7, $4);}
+space_decl : TLPAREN text TCOMMA mel_arr TRPAREN {$$ = new NSArrAssignment($2, *$4);}
+           | TLPAREN text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {$$ = new NSInAssignment($2, $7, $4);}
            | TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
            | TLPAREN TDOLLAR text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSInAssignment($3, $8, $5);}
+           | TLPAREN TDOLLAR text TCOMMA mel_arr TRPAREN {printf("Stored Space... \n");$$ = new NSTSArrAssignment($3, *$5);}
            | TLPAREN TDOLLAR text TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSAssignment($3,$5);}
       ;
 
@@ -129,6 +131,9 @@ ident : TIDENTIFIER {;$$ = new NIdentifier(*$1); delete $1;}
 
 text : TTEXT {$$ = new NIdentifier(*$1); delete $1;}
       ;
+
+mel_arr: mel {$$ = new vector<NExpression*>; $$->push_back($1);}
+       | mel_arr TSEMCOLN mel {$$->push_back($3);}
 
 mel : term_lone{}
     | mel operator_lthree term_lone {$$ = new NBinaryOperator($1,$2,$3);}

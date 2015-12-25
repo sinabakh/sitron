@@ -50,6 +50,24 @@ Value* NSInAssignment::codeGen(Arendelle* arendelle)
 	return tmpValue;
 }
 
+Value* NSArrAssignment::codeGen(Arendelle* arendelle)
+{
+	Value* lVal = lhs->codeGen(arendelle);
+
+	std::string name = static_cast<VString*>(lVal)->value;
+	spaceStrCorrector(&name);
+	for(long long i=0; i<this->indexes.size(); i++)
+	{
+		Value* inVal = this->indexes[i]->codeGen(arendelle);
+		long long inValue = (long long)static_cast<VFloat*>(inVal)->value;
+		arendelle->addOrUpdateSpace(name, inValue, i);
+	}
+	std::cout<<std::endl<<"Define Space with Array "<<std::endl;
+	Value* tmpValue = new Value;
+	tmpValue = new VResult(1);
+	return tmpValue;
+}
+
 Value* NSpace::codeGen(Arendelle* arendelle)
 {
 	Value* nVal = name->codeGen(arendelle);
@@ -133,6 +151,22 @@ Value* NSTSInAssignment::codeGen(Arendelle* arendelle)
 	double value = static_cast<VFloat*>(rVal)->value;
 	std::cout<<std::endl<<"Define Stored Space : "<<value<<" -> "<<name<<std::endl;
 	arendelle->addOrUpdateStoredSpace(name, value, inValue);
+	Value* tmpValue = new Value;
+	return tmpValue;
+}
+
+Value* NSTSArrAssignment::codeGen(Arendelle* arendelle)
+{
+	Value* lVal = lhs->codeGen(arendelle);
+	std::string name = static_cast<VString*>(lVal)->value;
+	stSpaceStrCorrector(&name);
+	std::cout<<std::endl<<"Define Stored Space with Array "<<std::endl;
+	for(long long i=0; i<this->indexes.size(); i++)
+	{
+		Value* inVal = this->indexes[i]->codeGen(arendelle);
+		long long inValue = (long long)static_cast<VFloat*>(inVal)->value;
+		arendelle->addOrUpdateStoredSpace(name, inValue, i);
+	}
 	Value* tmpValue = new Value;
 	return tmpValue;
 }

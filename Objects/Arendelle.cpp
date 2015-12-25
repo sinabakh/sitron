@@ -174,7 +174,7 @@ void Arendelle::addOrUpdateStoredSpace(string name, double value, long long inde
 	string filename = this->workingDir + name + ".space";
 	ofstream sFile (filename);
 	for(long long i=0; i<storedSpaces[name].size(); i++)
-		sFile << storedSpaces[name][i];
+		sFile << storedSpaces[name][i]<<",";
 	sFile.close();
 }
 
@@ -308,7 +308,8 @@ void Arendelle::initStoredSpaces()
 		ifstream file(files[i].string());
 		vector<double> values;
 		double value;
-		while(file >> value)
+		char comma;
+		while(file >> value >> comma)
 			values.push_back(value);
 		cout << "Init St Space : "<<value << " -> "<<name<<endl;
 		storedSpaces[name] = values;

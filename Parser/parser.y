@@ -110,11 +110,13 @@ condition : TLBRACE mel TCOMMA stmts TRBRACE {NBlock* fcd = new NBlock();$$ = ne
 
 space_decl : TLPAREN text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {$$ = new NSInAssignment($2, $7, $4);}
            | TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
+           | TLPAREN TDOLLAR text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSInAssignment($3, $8, $5);}
            | TLPAREN TDOLLAR text TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSAssignment($3,$5);}
       ;
 
 space : TSPACE TLBRACK mel TRBRACK {NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NInSpace(tmp, $3);}
       | TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
+      | TDOLLAR text TLBRACK mel TRBRACK{$$ = new NSTInSpace($2, $4);}
       | TDOLLAR text {$$ = new NSTSpace($2);}
       ;
 

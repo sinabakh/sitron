@@ -31,7 +31,7 @@ Value* NFunction::codeGen(Arendelle* arendelle)
 		if(i >= func->args.size())
 			break;
 		Value* argVal = args[i]->codeGen(arendelle);
-		long long arg = static_cast<VInt*>(argVal)->value;
+		long long arg = (long long)static_cast<VFloat*>(argVal)->value;
 		arendelle->addOrUpdateSpace(func->args[i],arg);
 	}
 

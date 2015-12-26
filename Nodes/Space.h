@@ -54,6 +54,13 @@ public:
 	virtual Value* codeGen(Arendelle* arendelle);
 };
 
+class NSpaceSize : public NExpression {
+public:
+	NIdentifier* name;
+	NSpaceSize(NIdentifier* name) : name(name) {}
+	virtual Value* codeGen(Arendelle* arendelle);
+};
+
 class NSTSAssignment : public NExpression {
 public:
     NIdentifier* lhs;
@@ -104,6 +111,13 @@ public:
 	NIdentifier* name;
 	NExpression* index;
 	NSTInSpace(NIdentifier* name, NExpression* index) : name(name), index(index) {}
+	virtual Value* codeGen(Arendelle* arendelle);
+};
+
+class NSTSpaceSize : public NExpression {
+public:
+	NIdentifier* name;
+	NSTSpaceSize(NIdentifier* name) : name(name) {}
 	virtual Value* codeGen(Arendelle* arendelle);
 };
 

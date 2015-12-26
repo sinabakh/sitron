@@ -34,6 +34,8 @@ Here is a brief description for folders and few files:
 
 ### Not Implemented Features
 * Arrays
+* Functions returning Value
+* STL Functions
 
 ### Buggy Features
 * Whitespaces in between spaces name characters

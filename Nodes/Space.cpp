@@ -142,6 +142,26 @@ Value* NInSpace::codeGen(Arendelle* arendelle)
 	return val;
 }
 
+Value* NSpaceSize::codeGen(Arendelle* arendelle)
+{
+	Value* nVal = name->codeGen(arendelle);
+	std::string sName = static_cast<VString*>(nVal)->value;
+	spaceStrCorrector(&sName);
+	long long size;
+	if(arendelle->spaceExist(sName))
+	{
+		size = arendelle->getLastSpaceSearchArr().size();
+	}
+	else
+	{
+		yywarning("Non Defined Space, Thought its size Zero(0) by Default!");
+		size = 0;
+	}
+	std::cout<<std::endl<<" Space Size : "<<sName<<" -> "<<size<<std::endl;
+	Value* val = new VFloat(size);
+	return val;
+}
+
 
 void stSpaceStrCorrector(std::string* str)
 {
@@ -272,5 +292,25 @@ Value* NSTInSpace::codeGen(Arendelle* arendelle)
 	}
 	std::cout<<std::endl<<"Access Stored Space : "<<sName<<" -> "<<sVal<<std::endl;
 	Value* val = new VFloat(sVal);
+	return val;
+}
+
+Value* NSTSpaceSize::codeGen(Arendelle* arendelle)
+{
+	Value* nVal = name->codeGen(arendelle);
+	std::string sName = static_cast<VString*>(nVal)->value;
+	stSpaceStrCorrector(&sName);
+	long long size;
+	if(arendelle->storedSpaceExist(sName))
+	{
+		size = arendelle->getLastStoredSpaceSearchArr().size();
+	}
+	else
+	{
+		yywarning("Non Defined Stored Space, Thought its size Zero(0) by Default!");
+		size = 0;
+	}
+	std::cout<<std::endl<<"Access Stored Space Size : "<<sName<<" -> "<<size<<std::endl;
+	Value* val = new VFloat(size);
 	return val;
 }

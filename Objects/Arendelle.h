@@ -47,12 +47,14 @@ public:
 	bool spaceExist(string name);
 	double getLastSpaceSearch(long long index);
 	double getLastSpaceSearch();
+	vector<double> getLastSpaceSearchArr();
 
 	void addOrUpdateStoredSpace(string name, double value);
 	void addOrUpdateStoredSpace(string name, double value, long long index);
 	bool storedSpaceExist(string name);
 	double getLastStoredSpaceSearch(long long index);
 	double getLastStoredSpaceSearch();
+	vector<double> getLastStoredSpaceSearchArr();
 
 	void initSources();
 	void initStoredSpaces();

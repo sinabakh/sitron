@@ -137,6 +137,11 @@ bool Arendelle::spaceExist(string name)
 	}
 }
 
+vector<double> Arendelle::getLastSpaceSearchArr()
+{
+	return spaceSearch->second;
+}
+
 double Arendelle::getLastSpaceSearch(long long index)
 {
 	if(index+1 > spaceSearch->second.size())
@@ -194,6 +199,11 @@ bool Arendelle::storedSpaceExist(string name)
 	{
 	        return false;
 	}
+}
+
+vector<double> Arendelle::getLastStoredSpaceSearchArr()
+{
+	return storedSpaceSearch->second;
 }
 
 

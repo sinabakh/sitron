@@ -108,9 +108,13 @@ condition : TLBRACE mel TCOMMA stmts TRBRACE {NBlock* fcd = new NBlock();$$ = ne
           | TLBRACE mel TCOMMA stmts TCOMMA stmts TRBRACE {$$ = new NCondition($2,$4,$6);}
           ;
 
-space_decl : TLPAREN text TCOMMA mel_arr TRPAREN {$$ = new NSArrAssignment($2, *$4);}
+space_decl : TLPAREN text TCOMMA TSPACE TRPAREN {NIdentifier* tmp = new NIdentifier(*$4) ;$$ = new NSSAssignment($2, tmp, true);}
+           | TLPAREN text TCOMMA TDOLLAR text TRPAREN {$$ = new NSSAssignment($2, $5, false);}
+           | TLPAREN text TCOMMA mel_arr TRPAREN {$$ = new NSArrAssignment($2, *$4);}
            | TLPAREN text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {$$ = new NSInAssignment($2, $7, $4);}
            | TLPAREN text TCOMMA mel TRPAREN {$$ = new NSAssignment($2,$4);}
+           | TLPAREN TDOLLAR text TCOMMA TSPACE TRPAREN {NIdentifier* tmp = new NIdentifier(*$5) ;$$ = new NSTSSAssignment($3, tmp, true);}
+           | TLPAREN TDOLLAR text TCOMMA TDOLLAR text TRPAREN {$$ = new NSTSSAssignment($3, $6, false);}
            | TLPAREN TDOLLAR text TLBRACK mel TRBRACK TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSInAssignment($3, $8, $5);}
            | TLPAREN TDOLLAR text TCOMMA mel_arr TRPAREN {printf("Stored Space... \n");$$ = new NSTSArrAssignment($3, *$5);}
            | TLPAREN TDOLLAR text TCOMMA mel TRPAREN {printf("Stored Space... \n");$$ = new NSTSAssignment($3,$5);}

@@ -68,6 +68,37 @@ Value* NSArrAssignment::codeGen(Arendelle* arendelle)
 	return tmpValue;
 }
 
+Value* NSSAssignment::codeGen(Arendelle* arendelle)
+{
+	Value* lVal = lhs->codeGen(arendelle);
+	std::string name = static_cast<VString*>(lVal)->value;
+	spaceStrCorrector(&name);
+
+	Value* rVal = rhs->codeGen(arendelle);
+	std::string rName = static_cast<VString*>(rVal)->value;
+	spaceStrCorrector(&rName);
+
+
+	if(is_space && arendelle->spaceExist(rName))
+	{
+		std::cout<<std::endl<<"Define Space with Array Space! "<<std::endl;
+		vector<double>vals = arendelle->getLastSpaceSearchArr();
+		for(long long i=0; i<vals.size(); i++)
+			arendelle->addOrUpdateSpace(name, vals[i], i);
+	}
+	else if(!is_space && arendelle->storedSpaceExist(rName))
+	{
+		std::cout<<std::endl<<"Define Space with Array Space! "<<std::endl;
+		vector<double>vals = arendelle->getLastStoredSpaceSearchArr();
+		for(long long i=0; i<vals.size(); i++)
+			arendelle->addOrUpdateSpace(name, vals[i], i);
+	}
+
+	Value* tmpValue = new Value;
+	tmpValue = new VResult(1);
+	return tmpValue;
+}
+
 Value* NSpace::codeGen(Arendelle* arendelle)
 {
 	Value* nVal = name->codeGen(arendelle);
@@ -169,6 +200,37 @@ Value* NSTSArrAssignment::codeGen(Arendelle* arendelle)
 	}
 	Value* tmpValue = new Value;
 	return tmpValue;
+}
+
+Value* NSTSSAssignment::codeGen(Arendelle* arendelle)
+{
+	Value* lVal = lhs->codeGen(arendelle);
+		std::string name = static_cast<VString*>(lVal)->value;
+		spaceStrCorrector(&name);
+
+		Value* rVal = rhs->codeGen(arendelle);
+		std::string rName = static_cast<VString*>(rVal)->value;
+		spaceStrCorrector(&rName);
+
+
+		if(is_space && arendelle->spaceExist(rName))
+		{
+			std::cout<<std::endl<<"Define Stored Space with Array Space! "<<std::endl;
+			vector<double>vals = arendelle->getLastSpaceSearchArr();
+			for(long long i=0; i<vals.size(); i++)
+				arendelle->addOrUpdateStoredSpace(name, vals[i], i);
+		}
+		else if(!is_space && arendelle->storedSpaceExist(rName))
+		{
+			std::cout<<std::endl<<"Define Stored Space with Array Space! "<<std::endl;
+			vector<double>vals = arendelle->getLastStoredSpaceSearchArr();
+			for(long long i=0; i<vals.size(); i++)
+				arendelle->addOrUpdateStoredSpace(name, vals[i], i);
+		}
+
+		Value* tmpValue = new Value;
+		tmpValue = new VResult(1);
+		return tmpValue;
 }
 
 Value* NSTSpace::codeGen(Arendelle* arendelle)

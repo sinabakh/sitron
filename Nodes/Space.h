@@ -29,6 +29,16 @@ public:
     virtual Value* codeGen(Arendelle* arendelle);
 };
 
+class NSSAssignment : public NExpression {
+public:
+    NIdentifier* lhs;
+    NExpression* rhs;
+    bool is_space;
+    NSSAssignment(NIdentifier* lhs, NExpression* rhs, bool is_space) :
+        lhs(lhs), rhs(rhs), is_space(is_space){ }
+    virtual Value* codeGen(Arendelle* arendelle);
+};
+
 class NSpace : public NExpression {
 public:
 	NIdentifier* name;
@@ -69,6 +79,16 @@ public:
     vector<NExpression*> indexes;
     NSTSArrAssignment(NIdentifier* lhs, vector<NExpression*> indexes) :
         lhs(lhs), indexes(indexes){ }
+    virtual Value* codeGen(Arendelle* arendelle);
+};
+
+class NSTSSAssignment : public NExpression {
+public:
+    NIdentifier* lhs;
+    NExpression* rhs;
+    bool is_space;
+    NSTSSAssignment(NIdentifier* lhs, NExpression* rhs, bool is_space) :
+        lhs(lhs), rhs(rhs), is_space(is_space){ }
     virtual Value* codeGen(Arendelle* arendelle);
 };
 

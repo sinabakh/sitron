@@ -86,7 +86,7 @@ stmt : expr {$$ = new NExpressionStatement(*$1); }
      | ident{errno=ERR_UNKNOWN_CMD;yyerror("");}
      ;
 
-expr : mel | cmd | loop | condition | space_decl | func_cal
+expr : mel | cmd | loop | condition | space_decl
      ;
 
 cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
@@ -152,7 +152,7 @@ term_lone : term_ltwo
 term_ltwo: mel_base | term_ltwo operator_ltwo mel_base {$$ = new NBinaryOperator($1,$2,$3);}
          ;
 
-mel_base : source | space | space_size | numeric | TLPAREN mel TRPAREN {$$ = $2;}
+mel_base : source | space | space_size | numeric | TLPAREN mel TRPAREN {$$ = $2;} | func_cal
          ;
 
 numeric : TINTEGER {$$ = new NInteger(atol($1->c_str())); delete $1;}

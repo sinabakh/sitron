@@ -43,6 +43,7 @@ text  [a-zA-Z._]*[a-zA-Z]+
 "}"                     return TOKEN(TRBRACE);
 ","                     return TOKEN(TCOMMA);
 ";"                     return TOKEN(TSEMCOLN);
+"?"                     return TOKEN(TQUESTION);
 "+"                     return TOKEN(TPLUS);
 "-"                     return TOKEN(TMINUS);
 "*"                     return TOKEN(TMUL);

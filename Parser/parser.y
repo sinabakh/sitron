@@ -47,7 +47,7 @@
  */
 %token <string> TIDENTIFIER TTEXT TINTEGER TDOUBLE TCMD TSPACE TSOURCE
 %token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL TNOT
-%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TSEMCOLN TATSIGN TDOLLAR TSHARP
+%token <token> TLBRACK TRBRACK TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TSEMCOLN TQUESTION TATSIGN TDOLLAR TSHARP
 %token <token> TPLUS TMINUS TMUL TDIV TMOD TPOW
 
 /* Define the type of node our nonterminal symbols represent.
@@ -59,7 +59,7 @@
 %type <ident> text
 %type <cmd> cmd
 //%type <space> space
-%type <expr> numeric expr loop condition func_cal space_decl source space mel term_lone term_ltwo mel_base
+%type <expr> numeric expr loop condition func_cal space_decl source space space_size mel term_lone term_ltwo mel_base
 //%type <varvec> func_decl_args
 //%type <exprvec> call_args
 %type <argvec> func_args mel_arr
@@ -126,6 +126,9 @@ space : TSPACE TLBRACK mel TRBRACK {NIdentifier* tmp = new NIdentifier(*$1) ;$$ 
       | TDOLLAR text {$$ = new NSTSpace($2);}
       ;
 
+space_size : TSPACE TQUESTION {NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpaceSize(tmp);}
+           | TDOLLAR text TQUESTION {$$ = new NSTSpaceSize($2);}
+
 source : TSOURCE { NIdentifier* tmp = new NIdentifier(*$1) ; $$ = new NSource(tmp);}
        ;
 
@@ -149,7 +152,7 @@ term_lone : term_ltwo
 term_ltwo: mel_base | term_ltwo operator_ltwo mel_base {$$ = new NBinaryOperator($1,$2,$3);}
          ;
 
-mel_base : source | space | numeric | TLPAREN mel TRPAREN {$$ = $2;}
+mel_base : source | space | space_size | numeric | TLPAREN mel TRPAREN {$$ = $2;}
          ;
 
 numeric : TINTEGER {$$ = new NInteger(atol($1->c_str())); delete $1;}

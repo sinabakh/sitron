@@ -61,7 +61,9 @@ public:
 class VFloat : public Value{
 public:
 	double value;
-	VFloat(double value) : value(value) {}
+	std::vector<double>values;
+	VFloat(double value) : value(value) {values.resize(1); values[0]=value;}
+	VFloat(std::vector<double>values): values(values) {value=values[0];}
 };
 
 class VString : public Value{

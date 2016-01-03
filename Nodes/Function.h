@@ -25,4 +25,12 @@ public:
 	virtual Value* codeGen(Arendelle* arendelle);
 };
 
+class NFunctionIndex: public NBlock{
+public:
+	NExpression* func;
+	NExpression* index;
+	NFunctionIndex(NExpression* func, NExpression* index) : func(func), index(index) { }
+	virtual Value* codeGen(Arendelle* arendelle);
+};
+
 #endif /* NODES_FUNCTION_H_ */

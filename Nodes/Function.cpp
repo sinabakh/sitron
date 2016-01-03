@@ -60,9 +60,21 @@ Value* NFunctionSize::codeGen(Arendelle* arendelle)
 	resVal = func->codeGen(arendelle);
 	arendelle->spaceExist("return");
 
-	//Value* inVal = index->codeGen(arendelle);
-	//double Index = static_cast<VFloat*>(inVal)->value;
-
 	resVal = new VFloat(arendelle->getLastSpaceSearchArr().size());
+	return resVal;
+}
+
+
+Value* NFunctionIndex::codeGen(Arendelle* arendelle)
+{
+	Value* resVal = new Value;
+
+	resVal = func->codeGen(arendelle);
+	arendelle->spaceExist("return");
+
+	Value* inVal = index->codeGen(arendelle);
+	double Index = static_cast<VFloat*>(inVal)->value;
+
+	resVal = new VFloat(arendelle->getLastSpaceSearch(Index));
 	return resVal;
 }

@@ -124,6 +124,7 @@ space : TSPACE TLBRACK mel TRBRACK {NIdentifier* tmp = new NIdentifier(*$1) ;$$ 
       | TSPACE { NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpace(tmp);}
       | TDOLLAR text TLBRACK mel TRBRACK{$$ = new NSTInSpace($2, $4);}
       | TDOLLAR text {$$ = new NSTSpace($2);}
+      | func_cal TLBRACK mel TRBRACK {$$ = new NFunctionIndex($1, $3);}
       ;
 
 space_size : TSPACE TQUESTION {NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpaceSize(tmp);}

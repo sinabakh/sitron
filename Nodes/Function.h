@@ -18,4 +18,11 @@ public:
 	virtual Value* codeGen(Arendelle* arendelle);
 };
 
+class NFunctionSize: public NBlock{
+public:
+	NExpression* func;
+	NFunctionSize(NExpression* func) : func(func) { }
+	virtual Value* codeGen(Arendelle* arendelle);
+};
+
 #endif /* NODES_FUNCTION_H_ */

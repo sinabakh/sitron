@@ -93,7 +93,7 @@ cmd : TCMD {;$$ = new NCommand(*$1); delete $1;}
     ;
 
 func_cal : TNOT text TLPAREN TRPAREN {$$ = new NFunction(new NIdentifier(*$2));}
-         |  TNOT text TLPAREN func_args TRPAREN {$$ = new NFunction(new NIdentifier(*$2),*$4);}
+         | TNOT text TLPAREN func_args TRPAREN {$$ = new NFunction(new NIdentifier(*$2),*$4);}
          ;
 
 func_args : mel {$$ = new vector<NExpression*>; $$->push_back($1);}
@@ -128,6 +128,7 @@ space : TSPACE TLBRACK mel TRBRACK {NIdentifier* tmp = new NIdentifier(*$1) ;$$ 
 
 space_size : TSPACE TQUESTION {NIdentifier* tmp = new NIdentifier(*$1) ;$$ = new NSpaceSize(tmp);}
            | TDOLLAR text TQUESTION {$$ = new NSTSpaceSize($2);}
+           | func_cal TQUESTION {$$ = new NFunctionSize($1);}
 
 source : TSOURCE { NIdentifier* tmp = new NIdentifier(*$1) ; $$ = new NSource(tmp);}
        ;

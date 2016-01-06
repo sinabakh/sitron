@@ -69,6 +69,9 @@ public:
 	vector<boost::filesystem::path> findFunctionFiles(string cDir);
 	vector<boost::filesystem::path> findStoredSpaceFiles(string cDir);
 
+	unordered_map<string, vector<double> > getSpaces();
+	void setSpaces(unordered_map<string, vector<double> > spaces);
+
 private:
 	unordered_map<string, Function*>functions;
 	unordered_map<string, Function*>::iterator functionSearch;

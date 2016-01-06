@@ -44,8 +44,13 @@ Value* NFunction::codeGen(Arendelle* arendelle)
 	programBlock = new NBlock();
 	yyparse();
 	arendelle->addOrUpdateSpace("return", 0);
+	unordered_map<string, vector<double> > backup;
+	backup = arendelle->getSpaces();
 	if(programBlock->statements.size()!=0)
 	       programBlock->codeGen(arendelle);
+	arendelle->spaceExist("return");
+	backup["return"] = arendelle->getLastSpaceSearchArr();
+	arendelle->setSpaces(backup);
 	arendelle->spaceExist("return");
 	resVal = new VFloat(arendelle->getLastSpaceSearch());
 	return resVal;

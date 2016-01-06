@@ -372,3 +372,11 @@ vector<boost::filesystem::path> Arendelle::findStoredSpaceFiles(string cDir)
 	}
 	return files;
 }
+
+unordered_map<string, vector<double> > Arendelle::getSpaces(){
+	return this->spaces;
+}
+
+void Arendelle::setSpaces(unordered_map<string, vector<double> > spaces){
+	this->spaces = spaces;
+}

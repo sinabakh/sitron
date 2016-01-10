@@ -9,6 +9,8 @@
 #include "Identifier.h"
 #include "Function.h"
 #include "../Objects/Function.h"
+#include "../Objects/STL.h"
+
 
 extern NBlock* programBlock;
 extern int yyparse();
@@ -21,6 +23,22 @@ Value* NFunction::codeGen(Arendelle* arendelle)
 	Value* funcNameVal = this->name->codeGen(arendelle);
 	string funcName = static_cast<VString*>(funcNameVal)->value;
 	cout<<"Running Function: "<<funcName<<endl;
+
+	if(is_stl(funcName))
+	{
+		std::vector<double>arguments;
+		for(int i=0; i<this->args.size(); i++)
+		{
+				Value* argVal = args[i]->codeGen(arendelle);
+				double arg = (double)static_cast<VFloat*>(argVal)->value;
+				arguments.push_back(arg);
+		}
+		double res = run_stl(funcName, arguments);
+		arendelle->addOrUpdateSpace("return", res);
+		resVal = new VFloat(res);
+		return resVal;
+	}
+
 	if(!arendelle->functionExist(funcName))
 		return resVal;
 	Function* func = arendelle->getLastFunctionSearch();
@@ -30,7 +48,7 @@ Value* NFunction::codeGen(Arendelle* arendelle)
 		if(i >= func->args.size())
 			break;
 		Value* argVal = args[i]->codeGen(arendelle);
-		long long arg = (long long)static_cast<VFloat*>(argVal)->value;
+		double arg = (double)static_cast<VFloat*>(argVal)->value;
 		arendelle->addOrUpdateSpace(func->args[i],arg);
 	}
 

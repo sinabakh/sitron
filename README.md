@@ -33,9 +33,7 @@ Here is a brief description for folders and few files:
 * [Renderer/](https://github.com/arendelle/sitron/tree/master/Renderer): The directory where Rendering codes are.
 
 ### Not Implemented Features
-* Arrays
-* Functions returning Value
-* STL Functions
+* Changing Window Title
 
 ### Buggy Features
 * Whitespaces in between spaces name characters
